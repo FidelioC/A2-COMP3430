@@ -6,42 +6,50 @@
 #include <stdio.h>
 #include <sys/queue.h>
 #include <stdbool.h>
+#include <pthread.h>
+#include <time.h>
 
 #include "tasks.h"
 #include "queue.h"
+#include "globals.h"
+#include "scheduler.h"
 
 #define MAX_TASK_ENTRY 4
-
-// global tracking time in microseconds
-long global_time = 0;
-
-// Define global variables for the ready queues
-Node *queue_four_head = NULL;
-Node *queue_four_tail = NULL;
 
 void read_file(FILE *file);
 char **split_to_array(char *line);
 void print_array(char **array, int count);
+void add_task(char **splitted_array);
+void init_locks(void);
+void make_delay(int delay_time);
 
 // main is the reading thread
 int main(void)
 {
-
+    init_locks();
     FILE *file = fopen("tasks.txt", "r");
     read_file(file);
-    print_queue(queue_four_head, "queue_four");
+    // print_queue(queue_four_head, "queue_four");
     return EXIT_SUCCESS;
+}
+
+void init_locks(void)
+{
+    // init locks
+    pthread_mutex_init(&queue_four_lock, NULL);
+    pthread_mutex_init(&queue_three_lock, NULL);
+    pthread_mutex_init(&queue_two_lock, NULL);
+    pthread_mutex_init(&queue_one_lock, NULL);
 }
 
 void add_task(char **splitted_array)
 {
-    // TODO: HAVE TO USE LOCK HERE LATER!
-
     char *name = splitted_array[0];     // task name
     int type = atoi(splitted_array[1]); // task type or delay time
     long length;                        // task length
     float odds;                         // io odds
 
+    // add task to the top of ready queue
     if (strcmp(name, "DELAY") != 0)
     {
         printf("adding task: %s\n\n", name);
@@ -50,7 +58,38 @@ void add_task(char **splitted_array)
         Task *new_task = create_new_task(name, type, length, odds, global_time);
         Node *new_node = (Node *)malloc(sizeof(Node));
         new_node->task = new_task;
+        pthread_mutex_lock(&queue_four_lock);
         enqueue(new_node, &queue_four_head, &queue_four_tail);
+        pthread_mutex_unlock(&queue_four_lock);
+    }
+    else
+    {
+        printf("DELAYING FOR %d microseconds\n", type);
+        make_delay(type);
+    }
+}
+
+void make_delay(int delay_time)
+{
+    struct timespec start_time;
+    struct timespec current_time;
+    long elapsed_time_seconds;
+    long elapsed_time_nanoseconds;
+    long total_elapsed_time;
+    clock_gettime(CLOCK_REALTIME, &start_time);
+    // loop for specified delayed time
+    while (1)
+    {
+        clock_gettime(CLOCK_REALTIME, &current_time);
+
+        elapsed_time_seconds = (current_time.tv_sec - start_time.tv_sec) * 1000000;
+        elapsed_time_nanoseconds = (current_time.tv_nsec - start_time.tv_nsec) / 1000;
+        total_elapsed_time = elapsed_time_seconds + elapsed_time_nanoseconds;
+        // printf("Total elapsed time: %ld\n", total_elapsed_time);
+        if (total_elapsed_time >= delay_time)
+        {
+            break;
+        }
     }
 }
 

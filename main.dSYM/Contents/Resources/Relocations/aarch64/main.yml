@@ -2,20 +2,39 @@
 triple:          'arm64-apple-darwin'
 binary-path:     main
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x10000370C, symSize: 0x5C }
-  - { offsetInCU: 0x3F, offset: 0x3F, size: 0x8, addend: 0x0, symName: _global_time, symObjAddr: 0x1570, symBinAddr: 0x100008000, symSize: 0x0 }
-  - { offsetInCU: 0x5B, offset: 0x5B, size: 0x8, addend: 0x0, symName: _queue_four_head, symObjAddr: 0x1578, symBinAddr: 0x100008008, symSize: 0x0 }
-  - { offsetInCU: 0x14D, offset: 0x14D, size: 0x8, addend: 0x0, symName: _queue_four_tail, symObjAddr: 0x1580, symBinAddr: 0x100008010, symSize: 0x0 }
-  - { offsetInCU: 0x15E, offset: 0x15E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x10000370C, symSize: 0x5C }
-  - { offsetInCU: 0x186, offset: 0x186, size: 0x8, addend: 0x0, symName: _read_file, symObjAddr: 0x5C, symBinAddr: 0x100003768, symSize: 0x88 }
-  - { offsetInCU: 0x1D4, offset: 0x1D4, size: 0x8, addend: 0x0, symName: _add_task, symObjAddr: 0xE4, symBinAddr: 0x1000037F0, symSize: 0xF0 }
-  - { offsetInCU: 0x25A, offset: 0x25A, size: 0x8, addend: 0x0, symName: _split_to_array, symObjAddr: 0x1D4, symBinAddr: 0x1000038E0, symSize: 0xC8 }
-  - { offsetInCU: 0x2BA, offset: 0x2BA, size: 0x8, addend: 0x0, symName: _print_array, symObjAddr: 0x29C, symBinAddr: 0x1000039A8, symSize: 0x80 }
-  - { offsetInCU: 0x26, offset: 0x53F, size: 0x8, addend: 0x0, symName: _create_new_task, symObjAddr: 0x0, symBinAddr: 0x100003A28, symSize: 0xB0 }
-  - { offsetInCU: 0xE8, offset: 0x601, size: 0x8, addend: 0x0, symName: _create_new_task, symObjAddr: 0x0, symBinAddr: 0x100003A28, symSize: 0xB0 }
-  - { offsetInCU: 0x156, offset: 0x66F, size: 0x8, addend: 0x0, symName: _print_task, symObjAddr: 0xB0, symBinAddr: 0x100003AD8, symSize: 0x158 }
-  - { offsetInCU: 0x26, offset: 0x6B9, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x0, symBinAddr: 0x100003C30, symSize: 0x70 }
-  - { offsetInCU: 0x41, offset: 0x6D4, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x0, symBinAddr: 0x100003C30, symSize: 0x70 }
-  - { offsetInCU: 0x81, offset: 0x714, size: 0x8, addend: 0x0, symName: _dequeue, symObjAddr: 0x70, symBinAddr: 0x100003CA0, symSize: 0x60 }
-  - { offsetInCU: 0xB7, offset: 0x74A, size: 0x8, addend: 0x0, symName: _print_queue, symObjAddr: 0xD0, symBinAddr: 0x100003D00, symSize: 0x74 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x1000034E4, symSize: 0x4C }
+  - { offsetInCU: 0x4D, offset: 0x4D, size: 0x8, addend: 0x0, symName: _queue_four_lock, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0xAC, offset: 0xAC, size: 0x8, addend: 0x0, symName: _queue_three_lock, symBinAddr: 0x100008080, symSize: 0x0 }
+  - { offsetInCU: 0xC1, offset: 0xC1, size: 0x8, addend: 0x0, symName: _queue_two_lock, symBinAddr: 0x1000080C0, symSize: 0x0 }
+  - { offsetInCU: 0xD6, offset: 0xD6, size: 0x8, addend: 0x0, symName: _queue_one_lock, symBinAddr: 0x100008040, symSize: 0x0 }
+  - { offsetInCU: 0x1C9, offset: 0x1C9, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x1000034E4, symSize: 0x4C }
+  - { offsetInCU: 0x1F1, offset: 0x1F1, size: 0x8, addend: 0x0, symName: _init_locks, symObjAddr: 0x4C, symBinAddr: 0x100003530, symSize: 0x5C }
+  - { offsetInCU: 0x206, offset: 0x206, size: 0x8, addend: 0x0, symName: _read_file, symObjAddr: 0xA8, symBinAddr: 0x10000358C, symSize: 0x88 }
+  - { offsetInCU: 0x254, offset: 0x254, size: 0x8, addend: 0x0, symName: _add_task, symObjAddr: 0x130, symBinAddr: 0x100003614, symSize: 0x134 }
+  - { offsetInCU: 0x2DA, offset: 0x2DA, size: 0x8, addend: 0x0, symName: _make_delay, symObjAddr: 0x264, symBinAddr: 0x100003748, symSize: 0x9C }
+  - { offsetInCU: 0x344, offset: 0x344, size: 0x8, addend: 0x0, symName: _split_to_array, symObjAddr: 0x300, symBinAddr: 0x1000037E4, symSize: 0xC8 }
+  - { offsetInCU: 0x3A4, offset: 0x3A4, size: 0x8, addend: 0x0, symName: _print_array, symObjAddr: 0x3C8, symBinAddr: 0x1000038AC, symSize: 0x80 }
+  - { offsetInCU: 0x26, offset: 0x655, size: 0x8, addend: 0x0, symName: _create_new_task, symObjAddr: 0x0, symBinAddr: 0x10000392C, symSize: 0xBC }
+  - { offsetInCU: 0xF4, offset: 0x723, size: 0x8, addend: 0x0, symName: _create_new_task, symObjAddr: 0x0, symBinAddr: 0x10000392C, symSize: 0xBC }
+  - { offsetInCU: 0x162, offset: 0x791, size: 0x8, addend: 0x0, symName: _print_task, symObjAddr: 0xBC, symBinAddr: 0x1000039E8, symSize: 0x174 }
+  - { offsetInCU: 0x26, offset: 0x7DB, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x0, symBinAddr: 0x100003B5C, symSize: 0x70 }
+  - { offsetInCU: 0x41, offset: 0x7F6, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x0, symBinAddr: 0x100003B5C, symSize: 0x70 }
+  - { offsetInCU: 0x81, offset: 0x836, size: 0x8, addend: 0x0, symName: _dequeue, symObjAddr: 0x70, symBinAddr: 0x100003BCC, symSize: 0x60 }
+  - { offsetInCU: 0xB7, offset: 0x86C, size: 0x8, addend: 0x0, symName: _print_queue, symObjAddr: 0xD0, symBinAddr: 0x100003C2C, symSize: 0x74 }
+  - { offsetInCU: 0xF7, offset: 0x8AC, size: 0x8, addend: 0x0, symName: _is_queue_empty, symObjAddr: 0x144, symBinAddr: 0x100003CA0, symSize: 0x54 }
+  - { offsetInCU: 0x26, offset: 0x9FD, size: 0x8, addend: 0x0, symName: _scheduler_thread, symObjAddr: 0x0, symBinAddr: 0x100003CF4, symSize: 0x8 }
+  - { offsetInCU: 0x3F, offset: 0xA16, size: 0x8, addend: 0x0, symName: _queue_four_lock, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0xAC, offset: 0xA83, size: 0x8, addend: 0x0, symName: _queue_three_lock, symBinAddr: 0x100008080, symSize: 0x0 }
+  - { offsetInCU: 0xC1, offset: 0xA98, size: 0x8, addend: 0x0, symName: _queue_two_lock, symBinAddr: 0x1000080C0, symSize: 0x0 }
+  - { offsetInCU: 0xD6, offset: 0xAAD, size: 0x8, addend: 0x0, symName: _queue_one_lock, symBinAddr: 0x100008040, symSize: 0x0 }
+  - { offsetInCU: 0xDF, offset: 0xAB6, size: 0x8, addend: 0x0, symName: _scheduler_thread, symObjAddr: 0x0, symBinAddr: 0x100003CF4, symSize: 0x8 }
+  - { offsetInCU: 0x33, offset: 0xB03, size: 0x8, addend: 0x0, symName: _global_time, symObjAddr: 0x9C8, symBinAddr: 0x100008100, symSize: 0x0 }
+  - { offsetInCU: 0x4F, offset: 0xB1F, size: 0x8, addend: 0x0, symName: _queue_four_head, symObjAddr: 0x9D0, symBinAddr: 0x100008108, symSize: 0x0 }
+  - { offsetInCU: 0x14D, offset: 0xC1D, size: 0x8, addend: 0x0, symName: _queue_four_tail, symObjAddr: 0x9D8, symBinAddr: 0x100008110, symSize: 0x0 }
+  - { offsetInCU: 0x162, offset: 0xC32, size: 0x8, addend: 0x0, symName: _queue_three_head, symObjAddr: 0x9E0, symBinAddr: 0x100008118, symSize: 0x0 }
+  - { offsetInCU: 0x177, offset: 0xC47, size: 0x8, addend: 0x0, symName: _queue_three_tail, symObjAddr: 0x9E8, symBinAddr: 0x100008120, symSize: 0x0 }
+  - { offsetInCU: 0x18C, offset: 0xC5C, size: 0x8, addend: 0x0, symName: _queue_two_head, symObjAddr: 0x9F0, symBinAddr: 0x100008128, symSize: 0x0 }
+  - { offsetInCU: 0x1A1, offset: 0xC71, size: 0x8, addend: 0x0, symName: _queue_two_tail, symObjAddr: 0x9F8, symBinAddr: 0x100008130, symSize: 0x0 }
+  - { offsetInCU: 0x1B6, offset: 0xC86, size: 0x8, addend: 0x0, symName: _queue_one_head, symObjAddr: 0xA00, symBinAddr: 0x100008138, symSize: 0x0 }
+  - { offsetInCU: 0x1CB, offset: 0xC9B, size: 0x8, addend: 0x0, symName: _queue_one_tail, symObjAddr: 0xA08, symBinAddr: 0x100008140, symSize: 0x0 }
 ...

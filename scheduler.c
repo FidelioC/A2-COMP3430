@@ -1,10 +1,13 @@
-#include <sys/queue.h>
+#include "queue.h"
+#include "globals.h"
+#include "tasks.h"
 
-#include "tasks.c"
+// TODO:
+//  functions:
+//   - dequeue and return which job to go to the dispatched queue
+//   - move all jobs to top most queue after some period time, reset its time allotment
 
-typedef struct
+void *scheduler_thread(void)
 {
-    Task *task;
-    STAILQ_ENTRY(queue_four)
-    pointers;
-} queue_four;
+    return 0;
+}

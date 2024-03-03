@@ -13,6 +13,7 @@ Task *create_new_task(char *name, int type, long length, float odds, long arriva
     newTask->task_priority = 4;                    // start from highest
     newTask->task_quantum_length = QUANTUM_TIME;   // init quantum time 50 microsec
     newTask->task_time_allotment = ALLOTMENT_TIME; // init allotment time 200 microsec
+    newTask->task_length_left = length;            // init length = original length
     newTask->task_arrival_time = arrival_time;     // get this from the global clock
     newTask->task_first_response = -1;             //-1, still haven't been served
     newTask->task_finish_time = -1;                // default
@@ -30,6 +31,7 @@ void print_task(Task *task)
     printf("Task Priority: %d\n", task->task_priority);
     printf("Task Quantum Length: %ld microseconds\n", task->task_quantum_length);
     printf("Task Time Allotment: %ld microseconds\n", task->task_time_allotment);
+    printf("Task Length Left: %ld microseconds\n", task->task_length_left);
     printf("Task Arrival Time: %ld microseconds\n", task->task_arrival_time);
     printf("Task First Response: %ld microseconds\n", task->task_first_response);
     printf("Task Finish Time: %ld microseconds\n", task->task_finish_time);

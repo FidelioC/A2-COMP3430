@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <stdbool.h>
 
 #include "tasks.h"
 
@@ -17,5 +18,6 @@ typedef struct _node
 void enqueue(Node *item, Node **head, Node **tail);
 Node *dequeue(Node **head);
 void print_queue(Node *head, char *queue_name);
+bool is_queue_empty(Node **head, Node **tail);
 
 #endif

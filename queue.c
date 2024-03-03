@@ -37,3 +37,8 @@ void print_queue(Node *head, char *queue_name)
         curr = curr->next;
     }
 }
+
+bool is_queue_empty(Node **head, Node **tail)
+{
+    return *head == NULL && *tail == NULL;
+}
