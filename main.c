@@ -7,21 +7,17 @@
 #include <sys/queue.h>
 #include <stdbool.h>
 
-#include "tasks.c"
-
-typedef struct _queuefour
-{
-    Task *task;
-    STAILQ_ENTRY(_queuefour)
-    pointers;
-} queue_four;
+#include "tasks.h"
+#include "queue.h"
 
 #define MAX_TASK_ENTRY 4
-long global_time = 0; // global tracking time in microseconds
 
-// ready MLFQ global queues
-STAILQ_HEAD(four_queue, _queuefour)
-fourth_queue;
+// global tracking time in microseconds
+long global_time = 0;
+
+// Define global variables for the ready queues
+Node *queue_four_head = NULL;
+Node *queue_four_tail = NULL;
 
 void read_file(FILE *file);
 char **split_to_array(char *line);
@@ -30,11 +26,10 @@ void print_array(char **array, int count);
 // main is the reading thread
 int main(void)
 {
+
     FILE *file = fopen("tasks.txt", "r");
     read_file(file);
-
-    STAILQ_INIT(&fourth_queue);
-
+    print_queue(queue_four_head, "queue_four");
     return EXIT_SUCCESS;
 }
 
@@ -46,26 +41,29 @@ void add_task(char **splitted_array)
     int type = atoi(splitted_array[1]); // task type or delay time
     long length;                        // task length
     float odds;                         // io odds
-    if (!strcmp(name, "DELAY"))
+
+    if (strcmp(name, "DELAY") != 0)
     {
+        printf("adding task: %s\n\n", name);
         length = strtol(splitted_array[2], NULL, 10); // 10 = base 10
         odds = atof(splitted_array[3]);
         Task *new_task = create_new_task(name, type, length, odds, global_time);
-        queue_four *new_entry = malloc(sizeof(queue_four));
-        new_entry->task = new_task;
-        STAILQ_INSERT_TAIL(&fourth_queue, new_entry, pointers);
+        Node *new_node = (Node *)malloc(sizeof(Node));
+        new_node->task = new_task;
+        enqueue(new_node, &queue_four_head, &queue_four_tail);
     }
 }
 
 void read_file(FILE *file)
 {
-
     char *line = NULL;
+    char **splitted_array;
     size_t length = 0;
     while (getline(&line, &length, file) != -1)
     {
         printf("line is: %s", line);
-        split_to_array(line);
+        splitted_array = split_to_array(line);
+        add_task(splitted_array);
     }
     fclose(file);
     free(line);
