@@ -11,11 +11,18 @@ void *dispatcher(void *ignore)
     {
         // send signal to worker
         pthread_mutex_lock(&dispatcher_worker_lock);
-        task_available = true;
+        is_task_available = true;
         pthread_cond_signal(&worker_cond);
         pthread_mutex_unlock(&dispatcher_worker_lock);
     }
-    task_available = false;
+    is_task_available = false;
+
+    // clean any worker
+    pthread_mutex_lock(&dispatcher_worker_lock);
+    is_terminate_worker = true;
+    pthread_cond_broadcast(&worker_cond);
+    pthread_mutex_unlock(&dispatcher_worker_lock);
+
     printf("Exiting dispatcher thread\n");
     pthread_exit(0);
 }

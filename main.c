@@ -35,7 +35,7 @@ typedef struct
 
 int main(void)
 {
-    int total_workers = 3; // constant will change later
+    total_workers = 3; // constant will change later
     ReadFileParams args;
     pthread_t scheduler_thread;
     pthread_t reader_thread;
@@ -103,7 +103,6 @@ void init_locks(void)
     pthread_mutex_init(&queue_dispatcher_lock, NULL);
 
     // init cond
-    pthread_cond_init(&dispatcher_cond, NULL);
     pthread_cond_init(&worker_cond, NULL);
 }
 

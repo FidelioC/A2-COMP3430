@@ -13,6 +13,9 @@ extern long global_time;
 // file reading boolean
 extern bool is_reading_complete;
 
+// total workers
+extern int total_workers;
+
 // === SCHEDULER GLOBALS ===
 // locks for scheduler queue
 pthread_mutex_t queue_four_lock;
@@ -35,9 +38,10 @@ extern Node *queue_one_tail;
 
 //===== dispatcher and workers globals ======
 extern int total_jobs_received;
-extern bool task_available;
+extern bool is_task_available;
+extern bool is_terminate_worker;
+
 // condition vars
-pthread_cond_t dispatcher_cond;
 pthread_cond_t worker_cond;
 
 // locks
