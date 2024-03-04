@@ -35,10 +35,7 @@ extern Node *queue_one_tail;
 
 //===== dispatcher and workers globals ======
 extern int total_jobs_received;
-// queue
-extern Node *queue_dispatcher_head;
-extern Node *queue_dispatcher_tail;
-
+extern bool task_available;
 // condition vars
 pthread_cond_t dispatcher_cond;
 pthread_cond_t worker_cond;

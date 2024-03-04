@@ -12,17 +12,17 @@ void *scheduler_thread_funct(void *ignored)
 {
     (void)ignored; // ignore this param
     int total_task = 0;
-    Node *chosen_task;
+    Node *chosen_task = NULL;
     while (!is_reading_complete || !is_all_queue_empty())
     {
-        chosen_task = choose_task();
+        // chosen_task = choose_task();
         if (chosen_task != NULL)
         {
-            total_task++;
-            printf("chosen task: %s\n\n", chosen_task->task->task_name);
-            pthread_mutex_lock(&queue_dispatcher_lock);
-            enqueue(chosen_task, &queue_dispatcher_head, &queue_dispatcher_tail);
-            pthread_mutex_unlock(&queue_dispatcher_lock);
+            // total_task++;
+            // printf("chosen task: %s\n\n", chosen_task->task->task_name);
+            // pthread_mutex_lock(&queue_dispatcher_lock);
+            // enqueue(chosen_task, &queue_dispatcher_head, &queue_dispatcher_tail);
+            // pthread_mutex_unlock(&queue_dispatcher_lock);
         }
     }
 

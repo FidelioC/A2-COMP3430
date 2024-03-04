@@ -35,7 +35,7 @@ typedef struct
 
 int main(void)
 {
-    int total_workers = 4; // constant will change later
+    int total_workers = 3; // constant will change later
     ReadFileParams args;
     pthread_t scheduler_thread;
     pthread_t reader_thread;
@@ -79,10 +79,14 @@ int main(void)
 
 void create_worker_threads(int total_workers, pthread_t *worker_threads)
 {
-    int worker_id;
+    // void *worker_id = malloc(sizeof(int));
+
     for (int i = 0; i < total_workers; i++)
     {
-        pthread_create(&worker_threads[i], NULL, worker, &worker_id);
+        int *worker_id = (int *)malloc(sizeof(int));
+        *worker_id = i;
+        printf("creating worker %d\n", *worker_id);
+        pthread_create(&worker_threads[i], NULL, worker, (void *)worker_id);
     }
 }
 

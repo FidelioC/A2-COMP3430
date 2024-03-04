@@ -18,7 +18,6 @@ Node *queue_one_head = NULL;
 Node *queue_one_tail = NULL;
 
 // init dispatcher and worker globals
-Node *queue_dispatcher_head = NULL;
-Node *queue_dispatcher_tail = NULL;
-
 int total_jobs_received = 0;
+
+bool task_available = false;
