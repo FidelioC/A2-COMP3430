@@ -4,8 +4,10 @@
 #include <pthread.h>
 #include "queue.h"
 
-#define ALLOTMENT_TIME 200;
-#define QUANTUM_TIME 50;
+#define ALLOTMENT_TIME 200
+#define QUANTUM_TIME 50
+#define NANOS_PER_USEC 1000
+#define USEC_PER_SEC 1000000
 
 // global tracking time in microseconds
 extern long global_time;
@@ -23,7 +25,7 @@ pthread_mutex_t queue_three_lock;
 pthread_mutex_t queue_two_lock;
 pthread_mutex_t queue_one_lock;
 
-// Define global variables for the ready queues
+// define global variables for the ready queues
 extern Node *queue_four_head;
 extern Node *queue_four_tail;
 
@@ -35,6 +37,11 @@ extern Node *queue_two_tail;
 
 extern Node *queue_one_head;
 extern Node *queue_one_tail;
+
+extern int queue_four_size;
+extern int queue_three_size;
+extern int queue_two_size;
+extern int queue_one_size;
 
 //===== dispatcher and workers globals ======
 extern int total_jobs_received;

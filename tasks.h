@@ -4,9 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ALLOTMENT_TIME 200;
-#define QUANTUM_TIME 50;
-
 typedef struct
 {
     // information from the task file
@@ -17,8 +14,7 @@ typedef struct
 
     // additional information
     int task_priority;        // 4,3,2,1 -> highest to lowest
-    long task_quantum_length; // microseconds
-    long task_time_allotment; // microseconds
+    long task_runtime;        // runtime of a task
     long task_length_left;    // remaining length microseconds
     long task_arrival_time;   // microseconds
     long task_first_response; // microseconds

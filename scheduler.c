@@ -30,6 +30,21 @@ void *scheduler_thread_funct(void *ignored)
     pthread_exit(0);
 }
 
+void set_runtime(Node *chosen_task, int size_before)
+{
+    if (chosen_task != NULL)
+    {
+        if (size_before >= 2) // round-robin
+        {
+            chosen_task->task->task_runtime = QUANTUM_TIME;
+        }
+        else // run normally
+        {
+            chosen_task->task->task_runtime = ALLOTMENT_TIME;
+        }
+    }
+}
+
 Node *choose_task(void)
 {
     // this includes Rule 1 and Rule 2:
@@ -44,24 +59,32 @@ Node *choose_task(void)
     {
         pthread_mutex_lock(&queue_four_lock);
         chosen_task = dequeue(&queue_four_head);
+        set_runtime(chosen_task, queue_four_size);
+        queue_four_size--;
         pthread_mutex_unlock(&queue_four_lock);
     }
     else if (!is_queue_empty(&queue_three_head))
     {
         pthread_mutex_lock(&queue_three_lock);
         chosen_task = dequeue(&queue_three_head);
+        set_runtime(chosen_task, queue_three_size);
+        queue_three_size--;
         pthread_mutex_unlock(&queue_three_lock);
     }
     else if (!is_queue_empty(&queue_two_head))
     {
         pthread_mutex_lock(&queue_two_lock);
         chosen_task = dequeue(&queue_two_head);
+        set_runtime(chosen_task, queue_two_size);
+        queue_two_size--;
         pthread_mutex_unlock(&queue_two_lock);
     }
     else
     {
         pthread_mutex_lock(&queue_one_lock);
         chosen_task = dequeue(&queue_one_head);
+        set_runtime(chosen_task, queue_one_size);
+        queue_one_size--;
         pthread_mutex_unlock(&queue_one_lock);
     }
     return chosen_task;

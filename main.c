@@ -23,7 +23,6 @@ char **split_to_array(char *line);
 void print_array(char **array, int count);
 void add_task(char **splitted_array);
 void init_locks(void);
-void make_delay(int delay_time);
 void create_worker_threads(int total_workers, pthread_t *worker_threads);
 
 typedef struct
@@ -35,7 +34,7 @@ typedef struct
 
 int main(void)
 {
-    total_workers = 3; // constant will change later
+    total_workers = 2; // constant will change later
     ReadFileParams args;
     pthread_t scheduler_thread;
     pthread_t reader_thread;
@@ -79,8 +78,6 @@ int main(void)
 
 void create_worker_threads(int total_workers, pthread_t *worker_threads)
 {
-    // void *worker_id = malloc(sizeof(int));
-
     for (int i = 0; i < total_workers; i++)
     {
         int *worker_id = (int *)malloc(sizeof(int));
@@ -126,36 +123,12 @@ void add_task(char **splitted_array)
         // Rule 3: when job enters the system, placed at the highest priority
         pthread_mutex_lock(&queue_four_lock);
         enqueue(new_node, &queue_four_head, &queue_four_tail);
+        queue_four_size++;
         pthread_mutex_unlock(&queue_four_lock);
     }
     else
     {
-        make_delay(type);
-    }
-}
-
-void make_delay(int delay_time)
-{
-    struct timespec start_time;
-    struct timespec current_time;
-    long elapsed_time_seconds;
-    long elapsed_time_nanoseconds;
-    long total_elapsed_time;
-    printf("DELAYING FOR %d microseconds\n", delay_time);
-    clock_gettime(CLOCK_REALTIME, &start_time);
-    // loop for specified delayed time
-    while (1)
-    {
-        clock_gettime(CLOCK_REALTIME, &current_time);
-
-        elapsed_time_seconds = (current_time.tv_sec - start_time.tv_sec) * 1000000;
-        elapsed_time_nanoseconds = (current_time.tv_nsec - start_time.tv_nsec) / 1000;
-        total_elapsed_time = elapsed_time_seconds + elapsed_time_nanoseconds;
-        // printf("Total elapsed time: %ld\n", total_elapsed_time);
-        if (total_elapsed_time >= delay_time)
-        {
-            break;
-        }
+        microsleep(type);
     }
 }
 
@@ -178,7 +151,7 @@ void *read_file(void *args)
         if (init_read && strcmp(splitted_array[0], "DELAY") == 0)
         {
             params->file_position = ftell(file);
-            make_delay(atoi(splitted_array[1]));
+            microsleep(atoi(splitted_array[1]));
             return 0;
         }
         add_task(splitted_array);

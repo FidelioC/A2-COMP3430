@@ -4,7 +4,8 @@
 long global_time = 0;
 bool is_reading_complete = false;
 int total_workers = 0;
-// init head and tail queues
+
+// init mlfq globals
 Node *queue_four_head = NULL;
 Node *queue_four_tail = NULL;
 
@@ -16,6 +17,11 @@ Node *queue_two_tail = NULL;
 
 Node *queue_one_head = NULL;
 Node *queue_one_tail = NULL;
+
+int queue_four_size = 0;
+int queue_three_size = 0;
+int queue_two_size = 0;
+int queue_one_size = 0;
 
 // init dispatcher and worker globals
 int total_jobs_received = 0;
