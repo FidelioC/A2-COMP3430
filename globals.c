@@ -1,6 +1,8 @@
 #include "globals.h"
 
+// init globals
 long global_time = 0;
+bool is_reading_complete = false;
 
 // init head and tail queues
 Node *queue_four_head = NULL;

@@ -16,20 +16,47 @@
 
 #define MAX_TASK_ENTRY 4
 
-void read_file(FILE *file);
+void *read_file(void *args);
 char **split_to_array(char *line);
 void print_array(char **array, int count);
 void add_task(char **splitted_array);
 void init_locks(void);
 void make_delay(int delay_time);
 
-// main is the reading thread
+typedef struct
+{
+    FILE *file;
+    bool init_read;
+    long file_position;
+} ReadFileParams;
+
 int main(void)
 {
+    ReadFileParams args;
+    pthread_t scheduler_thread;
+    pthread_t reader_thread;
+
+    args.file = fopen("tasks.txt", "r");
+    args.init_read = true;
+    args.file_position = 0;
+    // init tasks
+    read_file(&args);
+
+    // finish init tasks
+    args.init_read = false;
+
+    //  init locks
     init_locks();
-    FILE *file = fopen("tasks.txt", "r");
-    read_file(file);
+
+    // init threads
+    pthread_create(&reader_thread, NULL, read_file, &args);
+    pthread_create(&scheduler_thread, NULL, scheduler_thread_funct, NULL);
+
+    pthread_join(reader_thread, NULL);
+    pthread_join(scheduler_thread, NULL);
     // print_queue(queue_four_head, "queue_four");
+    fclose(args.file);
+
     return EXIT_SUCCESS;
 }
 
@@ -58,13 +85,14 @@ void add_task(char **splitted_array)
         Task *new_task = create_new_task(name, type, length, odds, global_time);
         Node *new_node = (Node *)malloc(sizeof(Node));
         new_node->task = new_task;
+
+        // Rule 3: when job enters the system, placed at the highest priority
         pthread_mutex_lock(&queue_four_lock);
         enqueue(new_node, &queue_four_head, &queue_four_tail);
         pthread_mutex_unlock(&queue_four_lock);
     }
     else
     {
-        printf("DELAYING FOR %d microseconds\n", type);
         make_delay(type);
     }
 }
@@ -76,6 +104,7 @@ void make_delay(int delay_time)
     long elapsed_time_seconds;
     long elapsed_time_nanoseconds;
     long total_elapsed_time;
+    printf("DELAYING FOR %d microseconds\n", delay_time);
     clock_gettime(CLOCK_REALTIME, &start_time);
     // loop for specified delayed time
     while (1)
@@ -93,19 +122,35 @@ void make_delay(int delay_time)
     }
 }
 
-void read_file(FILE *file)
+void *read_file(void *args)
 {
+    ReadFileParams *params = (ReadFileParams *)args;
+    FILE *file = params->file;
+    bool init_read = params->init_read;
+    long file_position = params->file_position;
     char *line = NULL;
     char **splitted_array;
     size_t length = 0;
+
+    fseek(file, file_position, SEEK_SET);
+
     while (getline(&line, &length, file) != -1)
     {
         printf("line is: %s", line);
         splitted_array = split_to_array(line);
+        if (init_read && strcmp(splitted_array[0], "DELAY") == 0)
+        {
+            params->file_position = ftell(file);
+            make_delay(atoi(splitted_array[1]));
+            return 0;
+        }
         add_task(splitted_array);
     }
-    fclose(file);
     free(line);
+    is_reading_complete = true;
+
+    printf("Exiting reading thread\n");
+    pthread_exit(0);
 }
 
 char **split_to_array(char *line)
