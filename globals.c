@@ -1,6 +1,6 @@
 #include "globals.h"
 
-// init globals
+// init general globals
 long global_time = 0;
 bool is_reading_complete = false;
 
@@ -16,3 +16,9 @@ Node *queue_two_tail = NULL;
 
 Node *queue_one_head = NULL;
 Node *queue_one_tail = NULL;
+
+// init dispatcher and worker globals
+Node *queue_dispatcher_head = NULL;
+Node *queue_dispatcher_tail = NULL;
+
+int total_jobs_received = 0;

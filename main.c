@@ -13,6 +13,8 @@
 #include "queue.h"
 #include "globals.h"
 #include "scheduler.h"
+#include "workers.h"
+#include "dispatcher.h"
 
 #define MAX_TASK_ENTRY 4
 
@@ -22,6 +24,7 @@ void print_array(char **array, int count);
 void add_task(char **splitted_array);
 void init_locks(void);
 void make_delay(int delay_time);
+void create_worker_threads(int total_workers, pthread_t *worker_threads);
 
 typedef struct
 {
@@ -32,32 +35,55 @@ typedef struct
 
 int main(void)
 {
+    int total_workers = 4; // constant will change later
     ReadFileParams args;
     pthread_t scheduler_thread;
     pthread_t reader_thread;
+    pthread_t dispatcher_thread;
+    pthread_t worker_threads[total_workers];
 
+    // init param
     args.file = fopen("tasks.txt", "r");
     args.init_read = true;
     args.file_position = 0;
-    // init tasks
+
+    // init load tasks
     read_file(&args);
 
     // finish init tasks
     args.init_read = false;
 
-    //  init locks
+    // init locks
     init_locks();
 
     // init threads
     pthread_create(&reader_thread, NULL, read_file, &args);
     pthread_create(&scheduler_thread, NULL, scheduler_thread_funct, NULL);
+    pthread_create(&dispatcher_thread, NULL, dispatcher, NULL);
+    create_worker_threads(total_workers, worker_threads);
 
+    // wait for threads
     pthread_join(reader_thread, NULL);
     pthread_join(scheduler_thread, NULL);
+    pthread_join(dispatcher_thread, NULL);
+    for (int i = 0; i < total_workers; i++)
+    {
+        pthread_join(worker_threads[i], NULL);
+    }
+
     // print_queue(queue_four_head, "queue_four");
     fclose(args.file);
 
     return EXIT_SUCCESS;
+}
+
+void create_worker_threads(int total_workers, pthread_t *worker_threads)
+{
+    int worker_id;
+    for (int i = 0; i < total_workers; i++)
+    {
+        pthread_create(&worker_threads[i], NULL, worker, &worker_id);
+    }
 }
 
 void init_locks(void)
@@ -67,6 +93,14 @@ void init_locks(void)
     pthread_mutex_init(&queue_three_lock, NULL);
     pthread_mutex_init(&queue_two_lock, NULL);
     pthread_mutex_init(&queue_one_lock, NULL);
+    pthread_mutex_init(&queue_dispatcher_lock, NULL);
+    pthread_mutex_init(&total_jobs_received_lock, NULL);
+    pthread_mutex_init(&dispatcher_worker_lock, NULL);
+    pthread_mutex_init(&queue_dispatcher_lock, NULL);
+
+    // init cond
+    pthread_cond_init(&dispatcher_cond, NULL);
+    pthread_cond_init(&worker_cond, NULL);
 }
 
 void add_task(char **splitted_array)

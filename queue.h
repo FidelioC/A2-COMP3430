@@ -18,6 +18,6 @@ typedef struct _node
 void enqueue(Node *item, Node **head, Node **tail);
 Node *dequeue(Node **head);
 void print_queue(Node *head, char *queue_name);
-bool is_queue_empty(Node **head, Node **tail);
+bool is_queue_empty(Node **head);
 
 #endif
