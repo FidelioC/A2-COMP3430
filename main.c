@@ -104,16 +104,16 @@ void print_done_result(void)
     printf("Total type 3 %d\n", total_type3);
 
     printf("Average turnaround time per type:\n");
-    printf("\t Type 0 usec %ld\n", (total_turnaround_time_type0 / total_type0));
-    printf("\t Type 1 usec %ld\n", (total_turnaround_time_type1 / total_type1));
-    printf("\t Type 2 usec %ld\n", (total_turnaround_time_type2 / total_type2));
-    printf("\t Type 3 usec %ld\n", (total_turnaround_time_type3 / total_type3));
+    printf("\t Type 0 %ld usec \n", (total_turnaround_time_type0 / total_type0));
+    printf("\t Type 1 %ld usec\n", (total_turnaround_time_type1 / total_type1));
+    printf("\t Type 2 %ld usec\n", (total_turnaround_time_type2 / total_type2));
+    printf("\t Type 3 %ld usec\n", (total_turnaround_time_type3 / total_type3));
 
     printf("Average response time per type:\n");
-    printf("\t Type 0 usec %ld\n", (total_response_time_type0 / total_type0));
-    printf("\t Type 1 usec %ld\n", (total_response_time_type1 / total_type1));
-    printf("\t Type 2 usec %ld\n", (total_response_time_type2 / total_type2));
-    printf("\t Type 3 usec %ld\n", (total_response_time_type3 / total_type3));
+    printf("\t Type 0 %ld usec\n", (total_response_time_type0 / total_type0));
+    printf("\t Type 1 %ld usec\n", (total_response_time_type1 / total_type1));
+    printf("\t Type 2 %ld usec\n", (total_response_time_type2 / total_type2));
+    printf("\t Type 3 %ld usec\n", (total_response_time_type3 / total_type3));
 }
 
 void create_worker_threads(int total_workers, pthread_t *worker_threads)
