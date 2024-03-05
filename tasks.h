@@ -24,6 +24,8 @@ typedef struct
 } Task;
 
 Task *create_new_task(char *name, int type, long length, float odds, long arrival_time);
+void update_task_finish_response(Task *task, long time);
+void update_task_first_response(Task *task, long time);
 void update_task_runtime(Task *task, long runtime);
 void update_task_allotment(Task *task, long allotment);
 void update_task_quantum(Task *task, long quantum);

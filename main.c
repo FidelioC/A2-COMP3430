@@ -24,7 +24,7 @@ void print_array(char **array, int count);
 void add_task(char **splitted_array);
 void init_locks(void);
 void create_worker_threads(int total_workers, pthread_t *worker_threads);
-long get_current_time_micro(void);
+void print_done_result(void);
 
 typedef struct
 {
@@ -35,7 +35,7 @@ typedef struct
 
 int main(void)
 {
-    total_workers = 2;     // constant will change later
+    total_workers = 10;    // constant will change later
     global_time_S = 10000; // constant will change
     ReadFileParams args;
     pthread_t scheduler_thread;
@@ -71,11 +71,46 @@ int main(void)
     {
         pthread_join(worker_threads[i], NULL);
     }
-    printf("QUEUE DONE SIZE %d\n", queue_done_size);
-    print_queue(queue_done_head, "DONE QUEUE: ");
+    print_done_result();
+
     fclose(args.file);
 
     return EXIT_SUCCESS;
+}
+
+void print_done_result(void)
+{
+    printf("QUEUE DONE SIZE %d\n", queue_done_size);
+    print_queue(queue_done_head, "DONE QUEUE: ");
+
+    printf("Total turnaround type 0 %ld\n", total_turnaround_time_type0);
+    printf("Total turnaround type 1 %ld\n", total_turnaround_time_type1);
+    printf("Total turnaround type 2 %ld\n", total_turnaround_time_type2);
+    printf("Total turnaround type 3 %ld\n", total_turnaround_time_type3);
+    printf("\n");
+    printf("Total response type 0 %ld\n", total_response_time_type0);
+    printf("Total response type 1 %ld\n", total_response_time_type1);
+    printf("Total response type 2 %ld\n", total_response_time_type2);
+    printf("Total response type 3 %ld\n", total_response_time_type3);
+    printf("\n");
+    printf("Total type 0 %d\n", total_type0);
+    printf("Total type 1 %d\n", total_type1);
+    printf("Total type 2 %d\n", total_type2);
+    printf("Total type 3 %d\n", total_type3);
+
+    printf("Average turnaround time per type:\n");
+    printf("\t Type 0 usec %ld\n", (total_turnaround_time_type0 / total_type0));
+    printf("\t Type 1 usec %ld\n", (total_turnaround_time_type1 / total_type1));
+    printf("\t Type 2 usec %ld\n", (total_turnaround_time_type2 / total_type2));
+    printf("\t Type 3 usec %ld\n", (total_turnaround_time_type3 / total_type3));
+
+    printf("Average response time per type:\n");
+    printf("\t Type 0 usec %ld\n", (total_response_time_type0 / total_type0));
+    printf("\t Type 1 usec %ld\n", (total_response_time_type1 / total_type1));
+    printf("\t Type 2 usec %ld\n", (total_response_time_type2 / total_type2));
+    printf("\t Type 3 usec %ld\n", (total_response_time_type3 / total_type3));
+
+    // printf("Type 0: %ld\n", (total_turnaround_time_type0 / queue_done_size));
 }
 
 void create_worker_threads(int total_workers, pthread_t *worker_threads)
@@ -106,15 +141,6 @@ void init_locks(void)
     // init cond
     pthread_cond_init(&worker_cond, NULL);
     pthread_cond_init(&dispatcher_cond, NULL);
-}
-
-long get_current_time_micro(void)
-{
-    struct timespec curr_time;
-
-    clock_gettime(CLOCK_REALTIME, &curr_time);
-
-    return curr_time.tv_sec * USEC_PER_SEC + curr_time.tv_nsec / NANOS_PER_USEC;
 }
 
 void add_task(char **splitted_array)

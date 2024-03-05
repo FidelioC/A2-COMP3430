@@ -33,3 +33,19 @@ bool is_terminate_worker = false;
 Node *queue_done_head = NULL;
 Node *queue_done_tail = NULL;
 int queue_done_size = 0;
+
+long total_response_time_type0 = 0;
+long total_turnaround_time_type0 = 0;
+int total_type0 = 0;
+
+long total_response_time_type1 = 0;
+long total_turnaround_time_type1 = 0;
+int total_type1 = 0;
+
+long total_response_time_type2 = 0;
+long total_turnaround_time_type2 = 0;
+int total_type2 = 0;
+
+long total_response_time_type3 = 0;
+long total_turnaround_time_type3 = 0;
+int total_type3 = 0;

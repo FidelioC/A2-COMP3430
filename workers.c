@@ -33,6 +33,9 @@ void *worker(void *arg)
             // do work
             if (node_task != NULL)
             {
+                // decide update first arrival response
+                decide_task_first_response(node_task);
+
                 // decide IO or no
                 decide_task_runtime(node_task);
 
@@ -66,6 +69,14 @@ void *worker(void *arg)
     }
     printf("Exiting worker %d thread\n", worker_id);
     pthread_exit(0);
+}
+
+void decide_task_first_response(Node *node_task)
+{
+    if (node_task->task->task_arrival_time != -1)
+    {
+        update_task_first_response(node_task->task, get_current_time_micro());
+    }
 }
 
 void decide_task_runtime(Node *node_task)
@@ -127,12 +138,44 @@ void decide_task_destination(Node *node_task)
     else
     {
         pthread_mutex_lock(&queue_done_lock);
+        update_task_finish_response(node_task->task, get_current_time_micro());
         enqueue(node_task, &queue_done_head, &queue_done_tail);
         queue_done_size++;
+        decide_response_turnaround(node_task);
         pthread_mutex_unlock(&queue_done_lock);
         printf("Task %s is FINISHED\n", node_task->task->task_name);
         // print_queue(queue_done_head, "queue head after added");
     }
+}
+
+void decide_response_turnaround(Node *node_task)
+{
+    if (node_task->task->task_type == 0)
+    {
+        calculate_response_turnaround(node_task, &total_turnaround_time_type0, &total_response_time_type0);
+        total_type0++;
+    }
+    else if (node_task->task->task_type == 1)
+    {
+        calculate_response_turnaround(node_task, &total_turnaround_time_type1, &total_response_time_type1);
+        total_type1++;
+    }
+    else if (node_task->task->task_type == 2)
+    {
+        calculate_response_turnaround(node_task, &total_turnaround_time_type2, &total_response_time_type2);
+        total_type2++;
+    }
+    else
+    {
+        calculate_response_turnaround(node_task, &total_turnaround_time_type3, &total_response_time_type3);
+        total_type3++;
+    }
+}
+
+void calculate_response_turnaround(Node *node_task, long *turnaround_type, long *response_type)
+{
+    *response_type = *response_type + (node_task->task->task_first_response - node_task->task->task_arrival_time);
+    *turnaround_type = *turnaround_type + (node_task->task->task_finish_time - node_task->task->task_arrival_time);
 }
 
 void microsleep(unsigned int usecs)
@@ -147,4 +190,13 @@ void microsleep(unsigned int usecs)
         // need to loop, `nanosleep` might return before sleeping
         // for the complete time (see `man nanosleep` for details)
     } while (ret == -1 && (t.tv_sec || t.tv_nsec));
+}
+
+long get_current_time_micro(void)
+{
+    struct timespec curr_time;
+
+    clock_gettime(CLOCK_REALTIME, &curr_time);
+
+    return curr_time.tv_sec * USEC_PER_SEC + curr_time.tv_nsec / NANOS_PER_USEC;
 }

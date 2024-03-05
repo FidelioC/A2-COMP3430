@@ -25,6 +25,16 @@ Task *create_new_task(char *name, int type, long length, float odds, long arriva
     return newTask;
 }
 
+void update_task_finish_response(Task *task, long time)
+{
+    task->task_finish_time = time;
+}
+
+void update_task_first_response(Task *task, long time)
+{
+    task->task_first_response = time;
+}
+
 void update_task_runtime(Task *task, long runtime)
 {
     task->task_runtime = runtime;

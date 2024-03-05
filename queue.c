@@ -36,8 +36,8 @@ void print_queue(Node *head, char *queue_name)
     Node *curr = head;
     while (curr != NULL)
     {
-        printf("Task: %s\n", curr->task->task_name);
-        // print_task(curr->task);
+        // printf("Task: %s\n", curr->task->task_name);
+        print_task(curr->task);
         curr = curr->next;
     }
 }

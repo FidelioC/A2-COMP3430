@@ -67,4 +67,20 @@ pthread_mutex_t queue_done_lock;
 
 extern int queue_done_size;
 
+extern long total_response_time_type0;
+extern long total_turnaround_time_type0;
+extern int total_type0;
+
+extern long total_response_time_type1;
+extern long total_turnaround_time_type1;
+extern int total_type1;
+
+extern long total_response_time_type2;
+extern long total_turnaround_time_type2;
+extern int total_type2;
+
+extern long total_response_time_type3;
+extern long total_turnaround_time_type3;
+extern int total_type3;
+
 #endif

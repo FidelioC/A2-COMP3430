@@ -11,11 +11,11 @@ void *dispatcher(void *ignore)
     {
         // send signal to worker
         pthread_mutex_lock(&dispatcher_worker_lock);
-        while (jobs_being_moved)
-        {
-            is_task_available = false;
-            pthread_cond_wait(&dispatcher_cond, &dispatcher_worker_lock);
-        }
+        // while (jobs_being_moved)
+        // {
+        //     is_task_available = false;
+        //     pthread_cond_wait(&dispatcher_cond, &dispatcher_worker_lock);
+        // }
         is_task_available = true;
         pthread_cond_signal(&worker_cond);
         pthread_mutex_unlock(&dispatcher_worker_lock);

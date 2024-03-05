@@ -25,7 +25,7 @@ void *scheduler_thread_funct(void *ignored)
         // printf("Elapsed time is %ld\n", elapsed_time);
         if (elapsed_time >= global_time_S)
         {
-            printf("Elapsed time is %ld\n", elapsed_time);
+            printf("Elapsed time has passed %ld\n", elapsed_time);
 
             jobs_being_moved = true;
             // reset start time
@@ -39,8 +39,8 @@ void *scheduler_thread_funct(void *ignored)
             //                           &queue_four_head, &queue_four_tail);
             // pthread_mutex_unlock(&queue_four_lock);
             // move_all_jobs();
-            jobs_being_moved = false;
-            pthread_cond_signal(&dispatcher_cond);
+            // jobs_being_moved = false;
+            // pthread_cond_signal(&dispatcher_cond);
         }
     }
 
@@ -53,6 +53,7 @@ void move_queues_to_queue_four(Node **queue_one_head, Node **queue_one_tail,
                                Node **queue_three_head, Node **queue_three_tail,
                                Node **queue_four_head, Node **queue_four_tail)
 {
+    printf("move queues to top queue\n");
     move_jobs_top_queue(queue_three_head, queue_three_tail, queue_four_head, queue_four_tail, &queue_three_lock, &queue_four_lock);
     move_jobs_top_queue(queue_two_head, queue_two_tail, queue_four_head, queue_four_tail, &queue_two_lock, &queue_four_lock);
     move_jobs_top_queue(queue_one_head, queue_one_tail, queue_four_head, queue_four_tail, &queue_one_lock, &queue_four_lock);
