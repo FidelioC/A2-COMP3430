@@ -16,7 +16,7 @@ typedef struct _node
 } Node;
 
 void enqueue(Node *item, Node **head, Node **tail);
-Node *dequeue(Node **head);
+Node *dequeue(Node **head, Node **tail);
 void print_queue(Node *head, char *queue_name);
 bool is_queue_empty(Node **head);
 

@@ -103,28 +103,24 @@ void decide_task_destination(Node *node_task)
         {
             pthread_mutex_lock(&queue_four_lock);
             enqueue(node_task, &queue_four_head, &queue_four_tail);
-            queue_four_size++;
             pthread_mutex_unlock(&queue_four_lock);
         }
         else if (node_task->task->task_priority == 3)
         {
             pthread_mutex_lock(&queue_three_lock);
             enqueue(node_task, &queue_three_head, &queue_three_tail);
-            queue_three_size++;
             pthread_mutex_unlock(&queue_three_lock);
         }
         else if (node_task->task->task_priority == 2)
         {
             pthread_mutex_lock(&queue_two_lock);
             enqueue(node_task, &queue_two_head, &queue_two_tail);
-            queue_two_size++;
             pthread_mutex_unlock(&queue_two_lock);
         }
         else
         {
             pthread_mutex_lock(&queue_one_lock);
             enqueue(node_task, &queue_one_head, &queue_one_tail);
-            queue_one_size++;
             pthread_mutex_unlock(&queue_one_lock);
         }
     }
@@ -135,6 +131,7 @@ void decide_task_destination(Node *node_task)
         queue_done_size++;
         pthread_mutex_unlock(&queue_done_lock);
         printf("Task %s is FINISHED\n", node_task->task->task_name);
+        // print_queue(queue_done_head, "queue head after added");
     }
 }
 

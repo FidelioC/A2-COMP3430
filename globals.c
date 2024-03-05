@@ -1,7 +1,7 @@
 #include "globals.h"
 
 // init general globals
-long global_time = 0;
+long global_time_S = 0;
 bool is_reading_complete = false;
 int total_workers = 0;
 
@@ -22,6 +22,7 @@ int queue_four_size = 0;
 int queue_three_size = 0;
 int queue_two_size = 0;
 int queue_one_size = 0;
+bool jobs_being_moved = false;
 
 // init dispatcher and worker globals
 int total_jobs_received = 0;

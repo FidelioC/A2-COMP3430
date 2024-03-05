@@ -14,7 +14,7 @@ void enqueue(Node *item, Node **head, Node **tail)
     }
 }
 
-Node *dequeue(Node **head)
+Node *dequeue(Node **head, Node **tail)
 {
     Node *result;
     if (*head == NULL)
@@ -23,6 +23,10 @@ Node *dequeue(Node **head)
     }
     result = *head;
     *head = (*head)->next;
+    if (*head == NULL)
+    {
+        *tail = NULL;
+    }
     return result;
 }
 

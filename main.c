@@ -24,6 +24,7 @@ void print_array(char **array, int count);
 void add_task(char **splitted_array);
 void init_locks(void);
 void create_worker_threads(int total_workers, pthread_t *worker_threads);
+long get_current_time_micro(void);
 
 typedef struct
 {
@@ -34,7 +35,8 @@ typedef struct
 
 int main(void)
 {
-    total_workers = 2; // constant will change later
+    total_workers = 2;     // constant will change later
+    global_time_S = 10000; // constant will change
     ReadFileParams args;
     pthread_t scheduler_thread;
     pthread_t reader_thread;
@@ -99,8 +101,20 @@ void init_locks(void)
     pthread_mutex_init(&dispatcher_worker_lock, NULL);
     pthread_mutex_init(&queue_dispatcher_lock, NULL);
     pthread_mutex_init(&queue_done_lock, NULL);
+    pthread_mutex_init(&move_jobs_lock, NULL);
+
     // init cond
     pthread_cond_init(&worker_cond, NULL);
+    pthread_cond_init(&dispatcher_cond, NULL);
+}
+
+long get_current_time_micro(void)
+{
+    struct timespec curr_time;
+
+    clock_gettime(CLOCK_REALTIME, &curr_time);
+
+    return curr_time.tv_sec * USEC_PER_SEC + curr_time.tv_nsec / NANOS_PER_USEC;
 }
 
 void add_task(char **splitted_array)
@@ -116,14 +130,13 @@ void add_task(char **splitted_array)
         printf("adding task: %s\n\n", name);
         length = strtol(splitted_array[2], NULL, 10); // 10 = base 10
         odds = atoi(splitted_array[3]);
-        Task *new_task = create_new_task(name, type, length, odds, global_time);
+        Task *new_task = create_new_task(name, type, length, odds, get_current_time_micro());
         Node *new_node = (Node *)malloc(sizeof(Node));
         new_node->task = new_task;
 
         // Rule 3: when job enters the system, placed at the highest priority
         pthread_mutex_lock(&queue_four_lock);
         enqueue(new_node, &queue_four_head, &queue_four_tail);
-        queue_four_size++;
         pthread_mutex_unlock(&queue_four_lock);
     }
     else
