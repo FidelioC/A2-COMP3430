@@ -33,17 +33,25 @@ typedef struct
     long file_position;
 } ReadFileParams;
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    total_workers = 1;   // constant will change later
-    global_time_S = 200; // constant will change
+    // cmd argument check
+    if (argc != 4)
+    {
+        printf("Please provide the correct argument. Need 3 inputs arg.\n");
+        exit(EXIT_FAILURE);
+    }
+    // init variables
     ReadFileParams args;
     pthread_t reader_thread;
     pthread_t dispatcher_thread;
+    char *file_name = argv[3];
+    total_workers = atoi(argv[1]);
+    global_time_S = strtol(argv[2], NULL, 10);
     pthread_t worker_threads[total_workers];
 
     // init param
-    args.file = fopen("tasks.txt", "r");
+    args.file = fopen(file_name, "r");
     args.init_read = true;
     args.file_position = 0;
 
@@ -106,8 +114,6 @@ void print_done_result(void)
     printf("\t Type 1 usec %ld\n", (total_response_time_type1 / total_type1));
     printf("\t Type 2 usec %ld\n", (total_response_time_type2 / total_type2));
     printf("\t Type 3 usec %ld\n", (total_response_time_type3 / total_type3));
-
-    // printf("Type 0: %ld\n", (total_turnaround_time_type0 / queue_done_size));
 }
 
 void create_worker_threads(int total_workers, pthread_t *worker_threads)
@@ -164,7 +170,7 @@ void add_task(char **splitted_array)
     }
     else
     {
-        microsleep(type);
+        microsleep((type / NANOS_PER_USEC)); // convert to microseconds
     }
 }
 
