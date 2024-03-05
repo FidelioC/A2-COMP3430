@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     // cmd argument check
     if (argc != 4)
     {
-        printf("Please provide the correct argument. Need 3 inputs arg.\n");
+        printf("Please provide the correct argument. Need 3 inputs arg <CPU> <S> <file_name.txt>.\n");
         exit(EXIT_FAILURE);
     }
     // init variables

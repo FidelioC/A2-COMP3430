@@ -6,6 +6,12 @@ bool is_reading_complete = false;
 int total_workers = 0;
 
 // init mlfq globals
+pthread_mutex_t queue_four_lock;
+pthread_mutex_t queue_three_lock;
+pthread_mutex_t queue_two_lock;
+pthread_mutex_t queue_one_lock;
+pthread_mutex_t move_jobs_lock;
+
 Node *queue_four_head = NULL;
 Node *queue_four_tail = NULL;
 
@@ -29,7 +35,18 @@ int total_jobs_received = 0;
 bool is_task_available = false;
 bool is_terminate_worker = false;
 
+// condition vars
+pthread_cond_t worker_cond;
+pthread_cond_t dispatcher_cond;
+
+// locks
+pthread_mutex_t total_jobs_received_lock;
+pthread_mutex_t dispatcher_worker_lock;
+pthread_mutex_t queue_dispatcher_lock;
+
 // done globals
+pthread_mutex_t queue_done_lock;
+
 Node *queue_done_head = NULL;
 Node *queue_done_tail = NULL;
 int queue_done_size = 0;
