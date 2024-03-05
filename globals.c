@@ -27,3 +27,8 @@ int queue_one_size = 0;
 int total_jobs_received = 0;
 bool is_task_available = false;
 bool is_terminate_worker = false;
+
+// done globals
+Node *queue_done_head = NULL;
+Node *queue_done_tail = NULL;
+int queue_done_size = 0;

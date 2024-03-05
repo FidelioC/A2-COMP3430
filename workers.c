@@ -6,6 +6,7 @@
 #include "globals.h"
 #include "scheduler.h"
 #include "workers.h"
+#include "tasks.h"
 
 void *worker(void *arg)
 {
@@ -31,6 +32,9 @@ void *worker(void *arg)
             // do work
             if (node_task != NULL)
             {
+                // TODO: do IO check here
+                update_task_runtime(node_task->task, node_task->task->task_quantum_length);
+
                 pthread_mutex_lock(&total_jobs_received_lock);
                 total_jobs_received++;
                 printf("Worker %d received task:\n", worker_id);
@@ -38,14 +42,84 @@ void *worker(void *arg)
                 printf("Total jobs received by worker: %d\n", total_jobs_received);
                 pthread_mutex_unlock(&total_jobs_received_lock);
 
+                // update remaining time of this task
+                update_task_length_left(node_task->task);
+
                 // working for the specified run time
                 microsleep(node_task->task->task_runtime);
+
+                // update task allotment
+                update_task_allotment(node_task->task, node_task->task->task_time_allotment - node_task->task->task_runtime);
+
+                // decide task priority
+                decide_task_priority(node_task);
+
+                // decide task destination
+                decide_task_destination(node_task);
+
+                printf("Worker %d finished task:\n", worker_id);
+                print_task(node_task->task);
             }
         }
         pthread_mutex_unlock(&dispatcher_worker_lock);
     }
     printf("Exiting worker %d thread\n", worker_id);
     pthread_exit(0);
+}
+
+void decide_task_priority(Node *node_task)
+{
+    if (node_task->task->task_time_allotment <= 0 && node_task->task->task_priority > 0)
+    {
+        // move down a priority, allotment has been used
+        update_task_priority(node_task->task, node_task->task->task_priority - 1);
+        // reset allotment
+        update_task_allotment(node_task->task, ALLOTMENT_TIME);
+    }
+}
+
+void decide_task_destination(Node *node_task)
+{
+    if (!is_task_finished(node_task->task))
+    {
+        if (node_task->task->task_priority == 4)
+        {
+            pthread_mutex_lock(&queue_four_lock);
+            enqueue(node_task, &queue_four_head, &queue_four_tail);
+            queue_four_size++;
+            pthread_mutex_unlock(&queue_four_lock);
+        }
+        else if (node_task->task->task_priority == 3)
+        {
+            pthread_mutex_lock(&queue_three_lock);
+            enqueue(node_task, &queue_three_head, &queue_three_tail);
+            queue_three_size++;
+            pthread_mutex_unlock(&queue_three_lock);
+        }
+        else if (node_task->task->task_priority == 2)
+        {
+            pthread_mutex_lock(&queue_two_lock);
+            enqueue(node_task, &queue_two_head, &queue_two_tail);
+            queue_two_size++;
+            pthread_mutex_unlock(&queue_two_lock);
+        }
+        else
+        {
+            pthread_mutex_lock(&queue_one_lock);
+            enqueue(node_task, &queue_one_head, &queue_one_tail);
+            queue_one_size++;
+            pthread_mutex_unlock(&queue_one_lock);
+        }
+    }
+    else
+    {
+        // TODO: go to done destination
+        pthread_mutex_lock(&queue_done_lock);
+        enqueue(node_task, &queue_done_head, &queue_done_tail);
+        queue_done_size++;
+        pthread_mutex_unlock(&queue_done_lock);
+        printf("Task %s is FINISHED\n", node_task->task->task_name);
+    }
 }
 
 void microsleep(unsigned int usecs)

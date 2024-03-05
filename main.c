@@ -69,8 +69,8 @@ int main(void)
     {
         pthread_join(worker_threads[i], NULL);
     }
-
-    // print_queue(queue_four_head, "queue_four");
+    printf("QUEUE DONE SIZE %d\n", queue_done_size);
+    print_queue(queue_done_head, "DONE QUEUE: ");
     fclose(args.file);
 
     return EXIT_SUCCESS;
@@ -98,7 +98,7 @@ void init_locks(void)
     pthread_mutex_init(&total_jobs_received_lock, NULL);
     pthread_mutex_init(&dispatcher_worker_lock, NULL);
     pthread_mutex_init(&queue_dispatcher_lock, NULL);
-
+    pthread_mutex_init(&queue_done_lock, NULL);
     // init cond
     pthread_cond_init(&worker_cond, NULL);
 }

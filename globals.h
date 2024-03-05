@@ -56,4 +56,12 @@ pthread_mutex_t total_jobs_received_lock;
 pthread_mutex_t dispatcher_worker_lock;
 pthread_mutex_t queue_dispatcher_lock;
 
+// ===== done section globals =====
+extern Node *queue_done_head;
+extern Node *queue_done_tail;
+
+pthread_mutex_t queue_done_lock;
+
+extern int queue_done_size;
+
 #endif
