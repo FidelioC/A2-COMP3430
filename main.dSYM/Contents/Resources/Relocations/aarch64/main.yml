@@ -2,37 +2,37 @@
 triple:          'arm64-apple-darwin'
 binary-path:     main
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100001A78, symSize: 0x214 }
-  - { offsetInCU: 0x364, offset: 0x364, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100001A78, symSize: 0x214 }
-  - { offsetInCU: 0x40C, offset: 0x40C, size: 0x8, addend: 0x0, symName: _read_file, symObjAddr: 0x214, symBinAddr: 0x100001C8C, symSize: 0x138 }
-  - { offsetInCU: 0x496, offset: 0x496, size: 0x8, addend: 0x0, symName: _init_locks, symObjAddr: 0x34C, symBinAddr: 0x100001DC4, symSize: 0xDC }
-  - { offsetInCU: 0x4AB, offset: 0x4AB, size: 0x8, addend: 0x0, symName: _create_worker_threads, symObjAddr: 0x428, symBinAddr: 0x100001EA0, symSize: 0xAC }
-  - { offsetInCU: 0x515, offset: 0x515, size: 0x8, addend: 0x0, symName: _print_done_result, symObjAddr: 0x4D4, symBinAddr: 0x100001F4C, symSize: 0x394 }
-  - { offsetInCU: 0x52A, offset: 0x52A, size: 0x8, addend: 0x0, symName: _add_task, symObjAddr: 0x868, symBinAddr: 0x1000022E0, symSize: 0x13C }
-  - { offsetInCU: 0x5B0, offset: 0x5B0, size: 0x8, addend: 0x0, symName: _split_to_array, symObjAddr: 0x9A4, symBinAddr: 0x10000241C, symSize: 0xC8 }
-  - { offsetInCU: 0x610, offset: 0x610, size: 0x8, addend: 0x0, symName: _print_array, symObjAddr: 0xA6C, symBinAddr: 0x1000024E4, symSize: 0x80 }
-  - { offsetInCU: 0x26, offset: 0x755, size: 0x8, addend: 0x0, symName: _create_new_task, symObjAddr: 0x0, symBinAddr: 0x100002564, symSize: 0xC8 }
-  - { offsetInCU: 0xF9, offset: 0x828, size: 0x8, addend: 0x0, symName: _create_new_task, symObjAddr: 0x0, symBinAddr: 0x100002564, symSize: 0xC8 }
-  - { offsetInCU: 0x167, offset: 0x896, size: 0x8, addend: 0x0, symName: _update_task_finish_response, symObjAddr: 0xC8, symBinAddr: 0x10000262C, symSize: 0x20 }
-  - { offsetInCU: 0x199, offset: 0x8C8, size: 0x8, addend: 0x0, symName: _update_task_first_response, symObjAddr: 0xE8, symBinAddr: 0x10000264C, symSize: 0x20 }
-  - { offsetInCU: 0x1CB, offset: 0x8FA, size: 0x8, addend: 0x0, symName: _update_task_runtime, symObjAddr: 0x108, symBinAddr: 0x10000266C, symSize: 0x20 }
-  - { offsetInCU: 0x1FD, offset: 0x92C, size: 0x8, addend: 0x0, symName: _update_task_allotment, symObjAddr: 0x128, symBinAddr: 0x10000268C, symSize: 0x20 }
-  - { offsetInCU: 0x22F, offset: 0x95E, size: 0x8, addend: 0x0, symName: _update_task_quantum, symObjAddr: 0x148, symBinAddr: 0x1000026AC, symSize: 0x20 }
-  - { offsetInCU: 0x261, offset: 0x990, size: 0x8, addend: 0x0, symName: _update_task_priority, symObjAddr: 0x168, symBinAddr: 0x1000026CC, symSize: 0x20 }
-  - { offsetInCU: 0x293, offset: 0x9C2, size: 0x8, addend: 0x0, symName: _update_task_length_left, symObjAddr: 0x188, symBinAddr: 0x1000026EC, symSize: 0x2C }
-  - { offsetInCU: 0x2B7, offset: 0x9E6, size: 0x8, addend: 0x0, symName: _is_task_finished, symObjAddr: 0x1B4, symBinAddr: 0x100002718, symSize: 0x24 }
-  - { offsetInCU: 0x2DF, offset: 0xA0E, size: 0x8, addend: 0x0, symName: _print_task, symObjAddr: 0x1D8, symBinAddr: 0x10000273C, symSize: 0x190 }
-  - { offsetInCU: 0x26, offset: 0xA66, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x0, symBinAddr: 0x1000028CC, symSize: 0x70 }
-  - { offsetInCU: 0x41, offset: 0xA81, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x0, symBinAddr: 0x1000028CC, symSize: 0x70 }
-  - { offsetInCU: 0x81, offset: 0xAC1, size: 0x8, addend: 0x0, symName: _dequeue, symObjAddr: 0x70, symBinAddr: 0x10000293C, symSize: 0x88 }
-  - { offsetInCU: 0xC5, offset: 0xB05, size: 0x8, addend: 0x0, symName: _print_queue, symObjAddr: 0xF8, symBinAddr: 0x1000029C4, symSize: 0x74 }
-  - { offsetInCU: 0x105, offset: 0xB45, size: 0x8, addend: 0x0, symName: _is_queue_empty, symObjAddr: 0x16C, symBinAddr: 0x100002A38, symSize: 0x24 }
-  - { offsetInCU: 0x26, offset: 0xC8D, size: 0x8, addend: 0x0, symName: _move_queues_to_queue_four, symObjAddr: 0x0, symBinAddr: 0x100002A5C, symSize: 0xB0 }
-  - { offsetInCU: 0x41, offset: 0xCA8, size: 0x8, addend: 0x0, symName: _move_queues_to_queue_four, symObjAddr: 0x0, symBinAddr: 0x100002A5C, symSize: 0xB0 }
-  - { offsetInCU: 0xC7, offset: 0xD2E, size: 0x8, addend: 0x0, symName: _move_jobs_top_queue, symObjAddr: 0xB0, symBinAddr: 0x100002B0C, symSize: 0xC0 }
-  - { offsetInCU: 0x14D, offset: 0xDB4, size: 0x8, addend: 0x0, symName: _calculate_time_elapsed, symObjAddr: 0x170, symBinAddr: 0x100002BCC, symSize: 0x5C }
-  - { offsetInCU: 0x19F, offset: 0xE06, size: 0x8, addend: 0x0, symName: _choose_task, symObjAddr: 0x1CC, symBinAddr: 0x100002C28, symSize: 0x140 }
-  - { offsetInCU: 0x1C7, offset: 0xE2E, size: 0x8, addend: 0x0, symName: _is_all_queue_empty, symObjAddr: 0x30C, symBinAddr: 0x100002D68, symSize: 0x88 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100001D00, symSize: 0x214 }
+  - { offsetInCU: 0x364, offset: 0x364, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100001D00, symSize: 0x214 }
+  - { offsetInCU: 0x40C, offset: 0x40C, size: 0x8, addend: 0x0, symName: _read_file, symObjAddr: 0x214, symBinAddr: 0x100001F14, symSize: 0x138 }
+  - { offsetInCU: 0x496, offset: 0x496, size: 0x8, addend: 0x0, symName: _init_locks, symObjAddr: 0x34C, symBinAddr: 0x10000204C, symSize: 0xDC }
+  - { offsetInCU: 0x4AB, offset: 0x4AB, size: 0x8, addend: 0x0, symName: _create_worker_threads, symObjAddr: 0x428, symBinAddr: 0x100002128, symSize: 0xAC }
+  - { offsetInCU: 0x515, offset: 0x515, size: 0x8, addend: 0x0, symName: _print_done_result, symObjAddr: 0x4D4, symBinAddr: 0x1000021D4, symSize: 0x210 }
+  - { offsetInCU: 0x52A, offset: 0x52A, size: 0x8, addend: 0x0, symName: _add_task, symObjAddr: 0x6E4, symBinAddr: 0x1000023E4, symSize: 0x13C }
+  - { offsetInCU: 0x5B0, offset: 0x5B0, size: 0x8, addend: 0x0, symName: _split_to_array, symObjAddr: 0x820, symBinAddr: 0x100002520, symSize: 0xC8 }
+  - { offsetInCU: 0x610, offset: 0x610, size: 0x8, addend: 0x0, symName: _print_array, symObjAddr: 0x8E8, symBinAddr: 0x1000025E8, symSize: 0x80 }
+  - { offsetInCU: 0x26, offset: 0x755, size: 0x8, addend: 0x0, symName: _create_new_task, symObjAddr: 0x0, symBinAddr: 0x100002668, symSize: 0xC8 }
+  - { offsetInCU: 0xF9, offset: 0x828, size: 0x8, addend: 0x0, symName: _create_new_task, symObjAddr: 0x0, symBinAddr: 0x100002668, symSize: 0xC8 }
+  - { offsetInCU: 0x167, offset: 0x896, size: 0x8, addend: 0x0, symName: _update_task_finish_response, symObjAddr: 0xC8, symBinAddr: 0x100002730, symSize: 0x20 }
+  - { offsetInCU: 0x199, offset: 0x8C8, size: 0x8, addend: 0x0, symName: _update_task_first_response, symObjAddr: 0xE8, symBinAddr: 0x100002750, symSize: 0x20 }
+  - { offsetInCU: 0x1CB, offset: 0x8FA, size: 0x8, addend: 0x0, symName: _update_task_runtime, symObjAddr: 0x108, symBinAddr: 0x100002770, symSize: 0x20 }
+  - { offsetInCU: 0x1FD, offset: 0x92C, size: 0x8, addend: 0x0, symName: _update_task_allotment, symObjAddr: 0x128, symBinAddr: 0x100002790, symSize: 0x20 }
+  - { offsetInCU: 0x22F, offset: 0x95E, size: 0x8, addend: 0x0, symName: _update_task_quantum, symObjAddr: 0x148, symBinAddr: 0x1000027B0, symSize: 0x20 }
+  - { offsetInCU: 0x261, offset: 0x990, size: 0x8, addend: 0x0, symName: _update_task_priority, symObjAddr: 0x168, symBinAddr: 0x1000027D0, symSize: 0x20 }
+  - { offsetInCU: 0x293, offset: 0x9C2, size: 0x8, addend: 0x0, symName: _update_task_length_left, symObjAddr: 0x188, symBinAddr: 0x1000027F0, symSize: 0x2C }
+  - { offsetInCU: 0x2B7, offset: 0x9E6, size: 0x8, addend: 0x0, symName: _is_task_finished, symObjAddr: 0x1B4, symBinAddr: 0x10000281C, symSize: 0x24 }
+  - { offsetInCU: 0x2DF, offset: 0xA0E, size: 0x8, addend: 0x0, symName: _print_task, symObjAddr: 0x1D8, symBinAddr: 0x100002840, symSize: 0x190 }
+  - { offsetInCU: 0x26, offset: 0xA66, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x0, symBinAddr: 0x1000029D0, symSize: 0x70 }
+  - { offsetInCU: 0x41, offset: 0xA81, size: 0x8, addend: 0x0, symName: _enqueue, symObjAddr: 0x0, symBinAddr: 0x1000029D0, symSize: 0x70 }
+  - { offsetInCU: 0x81, offset: 0xAC1, size: 0x8, addend: 0x0, symName: _dequeue, symObjAddr: 0x70, symBinAddr: 0x100002A40, symSize: 0x88 }
+  - { offsetInCU: 0xC5, offset: 0xB05, size: 0x8, addend: 0x0, symName: _print_queue, symObjAddr: 0xF8, symBinAddr: 0x100002AC8, symSize: 0x74 }
+  - { offsetInCU: 0x105, offset: 0xB45, size: 0x8, addend: 0x0, symName: _is_queue_empty, symObjAddr: 0x16C, symBinAddr: 0x100002B3C, symSize: 0x24 }
+  - { offsetInCU: 0x26, offset: 0xC8D, size: 0x8, addend: 0x0, symName: _move_queues_to_queue_four, symObjAddr: 0x0, symBinAddr: 0x100002B60, symSize: 0xB0 }
+  - { offsetInCU: 0x41, offset: 0xCA8, size: 0x8, addend: 0x0, symName: _move_queues_to_queue_four, symObjAddr: 0x0, symBinAddr: 0x100002B60, symSize: 0xB0 }
+  - { offsetInCU: 0xC7, offset: 0xD2E, size: 0x8, addend: 0x0, symName: _move_jobs_top_queue, symObjAddr: 0xB0, symBinAddr: 0x100002C10, symSize: 0xC0 }
+  - { offsetInCU: 0x14D, offset: 0xDB4, size: 0x8, addend: 0x0, symName: _calculate_time_elapsed, symObjAddr: 0x170, symBinAddr: 0x100002CD0, symSize: 0x5C }
+  - { offsetInCU: 0x19F, offset: 0xE06, size: 0x8, addend: 0x0, symName: _choose_task, symObjAddr: 0x1CC, symBinAddr: 0x100002D2C, symSize: 0x140 }
+  - { offsetInCU: 0x1C7, offset: 0xE2E, size: 0x8, addend: 0x0, symName: _is_all_queue_empty, symObjAddr: 0x30C, symBinAddr: 0x100002E6C, symSize: 0x88 }
   - { offsetInCU: 0x33, offset: 0xFF3, size: 0x8, addend: 0x0, symName: _global_time_S, symObjAddr: 0x12F0, symBinAddr: 0x100008000, symSize: 0x0 }
   - { offsetInCU: 0x4F, offset: 0x100F, size: 0x8, addend: 0x0, symName: _is_reading_complete, symObjAddr: 0x12F8, symBinAddr: 0x100008008, symSize: 0x0 }
   - { offsetInCU: 0x6B, offset: 0x102B, size: 0x8, addend: 0x0, symName: _total_workers, symObjAddr: 0x12FC, symBinAddr: 0x10000800C, symSize: 0x0 }
@@ -78,16 +78,16 @@ relocations:
   - { offsetInCU: 0x52E, offset: 0x14EE, size: 0x8, addend: 0x0, symName: _dispatcher_worker_lock, symBinAddr: 0x100008118, symSize: 0x0 }
   - { offsetInCU: 0x543, offset: 0x1503, size: 0x8, addend: 0x0, symName: _queue_dispatcher_lock, symBinAddr: 0x100008198, symSize: 0x0 }
   - { offsetInCU: 0x558, offset: 0x1518, size: 0x8, addend: 0x0, symName: _queue_done_lock, symBinAddr: 0x1000081D8, symSize: 0x0 }
-  - { offsetInCU: 0x26, offset: 0x1547, size: 0x8, addend: 0x0, symName: _worker, symObjAddr: 0x0, symBinAddr: 0x100002DF0, symSize: 0x28C }
-  - { offsetInCU: 0x50, offset: 0x1571, size: 0x8, addend: 0x0, symName: _worker, symObjAddr: 0x0, symBinAddr: 0x100002DF0, symSize: 0x28C }
-  - { offsetInCU: 0x94, offset: 0x15B5, size: 0x8, addend: 0x0, symName: _decide_task_first_response, symObjAddr: 0x28C, symBinAddr: 0x10000307C, symSize: 0x58 }
-  - { offsetInCU: 0xB8, offset: 0x15D9, size: 0x8, addend: 0x0, symName: _decide_task_runtime, symObjAddr: 0x2E4, symBinAddr: 0x1000030D4, symSize: 0xCC }
-  - { offsetInCU: 0xEA, offset: 0x160B, size: 0x8, addend: 0x0, symName: _microsleep, symObjAddr: 0x3B0, symBinAddr: 0x1000031A0, symSize: 0xD8 }
-  - { offsetInCU: 0x146, offset: 0x1667, size: 0x8, addend: 0x0, symName: _decide_task_priority, symObjAddr: 0x488, symBinAddr: 0x100003278, symSize: 0x84 }
-  - { offsetInCU: 0x16A, offset: 0x168B, size: 0x8, addend: 0x0, symName: _decide_task_destination, symObjAddr: 0x50C, symBinAddr: 0x1000032FC, symSize: 0x1EC }
-  - { offsetInCU: 0x18E, offset: 0x16AF, size: 0x8, addend: 0x0, symName: _get_current_time_micro, symObjAddr: 0x6F8, symBinAddr: 0x1000034E8, symSize: 0x44 }
-  - { offsetInCU: 0x1B6, offset: 0x16D7, size: 0x8, addend: 0x0, symName: _decide_response_turnaround, symObjAddr: 0x73C, symBinAddr: 0x10000352C, symSize: 0x138 }
-  - { offsetInCU: 0x1DA, offset: 0x16FB, size: 0x8, addend: 0x0, symName: _calculate_response_turnaround, symObjAddr: 0x874, symBinAddr: 0x100003664, symSize: 0x78 }
-  - { offsetInCU: 0x26, offset: 0x1879, size: 0x8, addend: 0x0, symName: _dispatcher, symObjAddr: 0x0, symBinAddr: 0x1000036DC, symSize: 0x1B0 }
-  - { offsetInCU: 0x48, offset: 0x189B, size: 0x8, addend: 0x0, symName: _dispatcher, symObjAddr: 0x0, symBinAddr: 0x1000036DC, symSize: 0x1B0 }
+  - { offsetInCU: 0x26, offset: 0x1547, size: 0x8, addend: 0x0, symName: _worker, symObjAddr: 0x0, symBinAddr: 0x100002EF4, symSize: 0x28C }
+  - { offsetInCU: 0x50, offset: 0x1571, size: 0x8, addend: 0x0, symName: _worker, symObjAddr: 0x0, symBinAddr: 0x100002EF4, symSize: 0x28C }
+  - { offsetInCU: 0x94, offset: 0x15B5, size: 0x8, addend: 0x0, symName: _decide_task_first_response, symObjAddr: 0x28C, symBinAddr: 0x100003180, symSize: 0x58 }
+  - { offsetInCU: 0xB8, offset: 0x15D9, size: 0x8, addend: 0x0, symName: _decide_task_runtime, symObjAddr: 0x2E4, symBinAddr: 0x1000031D8, symSize: 0xCC }
+  - { offsetInCU: 0xEA, offset: 0x160B, size: 0x8, addend: 0x0, symName: _microsleep, symObjAddr: 0x3B0, symBinAddr: 0x1000032A4, symSize: 0xD8 }
+  - { offsetInCU: 0x146, offset: 0x1667, size: 0x8, addend: 0x0, symName: _decide_task_priority, symObjAddr: 0x488, symBinAddr: 0x10000337C, symSize: 0x84 }
+  - { offsetInCU: 0x16A, offset: 0x168B, size: 0x8, addend: 0x0, symName: _decide_task_destination, symObjAddr: 0x50C, symBinAddr: 0x100003400, symSize: 0x1EC }
+  - { offsetInCU: 0x18E, offset: 0x16AF, size: 0x8, addend: 0x0, symName: _get_current_time_micro, symObjAddr: 0x6F8, symBinAddr: 0x1000035EC, symSize: 0x44 }
+  - { offsetInCU: 0x1B6, offset: 0x16D7, size: 0x8, addend: 0x0, symName: _decide_response_turnaround, symObjAddr: 0x73C, symBinAddr: 0x100003630, symSize: 0x138 }
+  - { offsetInCU: 0x1DA, offset: 0x16FB, size: 0x8, addend: 0x0, symName: _calculate_response_turnaround, symObjAddr: 0x874, symBinAddr: 0x100003768, symSize: 0x78 }
+  - { offsetInCU: 0x26, offset: 0x1879, size: 0x8, addend: 0x0, symName: _dispatcher, symObjAddr: 0x0, symBinAddr: 0x1000037E0, symSize: 0x1B0 }
+  - { offsetInCU: 0x48, offset: 0x189B, size: 0x8, addend: 0x0, symName: _dispatcher, symObjAddr: 0x0, symBinAddr: 0x1000037E0, symSize: 0x1B0 }
 ...
