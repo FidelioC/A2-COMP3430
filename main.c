@@ -35,10 +35,9 @@ typedef struct
 
 int main(void)
 {
-    total_workers = 10;    // constant will change later
-    global_time_S = 10000; // constant will change
+    total_workers = 1;   // constant will change later
+    global_time_S = 200; // constant will change
     ReadFileParams args;
-    pthread_t scheduler_thread;
     pthread_t reader_thread;
     pthread_t dispatcher_thread;
     pthread_t worker_threads[total_workers];
@@ -59,13 +58,11 @@ int main(void)
 
     // init threads
     pthread_create(&reader_thread, NULL, read_file, &args);
-    pthread_create(&scheduler_thread, NULL, scheduler_thread_funct, NULL);
     pthread_create(&dispatcher_thread, NULL, dispatcher, NULL);
     create_worker_threads(total_workers, worker_threads);
 
     // wait for threads
     pthread_join(reader_thread, NULL);
-    pthread_join(scheduler_thread, NULL);
     pthread_join(dispatcher_thread, NULL);
     for (int i = 0; i < total_workers; i++)
     {
