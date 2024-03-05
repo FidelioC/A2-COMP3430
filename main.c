@@ -115,7 +115,7 @@ void add_task(char **splitted_array)
     {
         printf("adding task: %s\n\n", name);
         length = strtol(splitted_array[2], NULL, 10); // 10 = base 10
-        odds = atof(splitted_array[3]);
+        odds = atoi(splitted_array[3]);
         Task *new_task = create_new_task(name, type, length, odds, global_time);
         Node *new_node = (Node *)malloc(sizeof(Node));
         new_node->task = new_task;

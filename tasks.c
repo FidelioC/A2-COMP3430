@@ -62,7 +62,7 @@ void print_task(Task *task)
     printf("Task Name: %s\n", task->task_name);
     printf("Task Type: %d\n", task->task_type);
     printf("Task Length: %ld microseconds\n", task->task_length);
-    printf("Task IO Odds: %f\n", task->task_IO_odds);
+    printf("Task IO Odds: %d\n", task->task_IO_odds);
     printf("Task Priority: %d\n", task->task_priority);
     printf("Task Quantum Length: %ld microseconds\n", task->task_quantum_length);
     printf("Task Time Allotment: %ld microseconds\n", task->task_time_allotment);

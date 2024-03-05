@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <time.h>
+#include <stdlib.h>
 
 #include "queue.h"
 #include "globals.h"
@@ -32,8 +33,8 @@ void *worker(void *arg)
             // do work
             if (node_task != NULL)
             {
-                // TODO: do IO check here
-                update_task_runtime(node_task->task, node_task->task->task_quantum_length);
+                // decide IO or no
+                decide_task_runtime(node_task);
 
                 pthread_mutex_lock(&total_jobs_received_lock);
                 total_jobs_received++;
@@ -65,6 +66,22 @@ void *worker(void *arg)
     }
     printf("Exiting worker %d thread\n", worker_id);
     pthread_exit(0);
+}
+
+void decide_task_runtime(Node *node_task)
+{
+    srand(time(NULL));
+    int random_number = rand() % MAX_NUMBER + MIN_NUMBER;
+    if (random_number <= node_task->task->task_IO_odds) // do IO
+    {
+        random_number = rand() % QUANTUM_TIME + MIN_NUMBER;
+        printf("DOING IO with time slice: %d\n", random_number);
+        update_task_runtime(node_task->task, random_number);
+    }
+    else // normal time slice
+    {
+        update_task_runtime(node_task->task, node_task->task->task_quantum_length);
+    }
 }
 
 void decide_task_priority(Node *node_task)
@@ -113,7 +130,6 @@ void decide_task_destination(Node *node_task)
     }
     else
     {
-        // TODO: go to done destination
         pthread_mutex_lock(&queue_done_lock);
         enqueue(node_task, &queue_done_head, &queue_done_tail);
         queue_done_size++;

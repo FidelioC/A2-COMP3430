@@ -7,10 +7,10 @@
 typedef struct
 {
     // information from the task file
-    char *task_name;    // name of the task
-    int task_type;      // 0-short, 1-medium, 2-long, 3-I/O
-    long task_length;   // microseconds
-    float task_IO_odds; // change percentage to float
+    char *task_name;  // name of the task
+    int task_type;    // 0-short, 1-medium, 2-long, 3-I/O
+    long task_length; // microseconds
+    int task_IO_odds; // percentage IO
 
     // additional information
     int task_priority;        // 4,3,2,1 -> highest to lowest
