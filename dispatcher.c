@@ -26,14 +26,14 @@ void *dispatcher(void *ignore)
             is_task_available = false;
             pthread_mutex_unlock(&dispatcher_worker_lock);
 
-            // reset start time
-            clock_gettime(CLOCK_REALTIME, &start_time);
-
             // increase all priority
             move_queues_to_queue_four(&queue_one_head, &queue_one_tail,
                                       &queue_two_head, &queue_two_tail,
                                       &queue_three_head, &queue_three_tail,
                                       &queue_four_head, &queue_four_tail);
+
+            // reset start time
+            clock_gettime(CLOCK_REALTIME, &start_time);
         }
         else
         {
