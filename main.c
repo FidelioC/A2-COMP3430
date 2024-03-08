@@ -171,7 +171,7 @@ void add_task(char **splitted_array)
     }
     else
     {
-        microsleep((type / NANOS_PER_USEC)); // convert to microseconds
+        microsleep(type); // convert to microseconds
     }
 }
 
