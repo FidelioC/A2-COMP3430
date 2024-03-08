@@ -26,7 +26,7 @@ void move_jobs_top_queue(Node **source_head, Node **source_tail,
     while (*source_head != NULL)
     {
         Node *chosen_task = dequeue(source_head, source_tail);
-        printf("Moving Task from queue: %s\n", chosen_task->task->task_name);
+        printf("Moving Task from queue %s, task %s\n", queue_name, chosen_task->task->task_name);
         update_task_priority(chosen_task->task, 4);
         pthread_mutex_lock(destination_lock);
         enqueue(chosen_task, destination_head, destination_tail);
