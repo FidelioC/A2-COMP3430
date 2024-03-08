@@ -26,7 +26,7 @@ delay_times = (100, 1000)
 
 total_tasks = 100
 
-with open("tasks2.txt", "w") as f:
+with open("tasks3.txt", "w") as f:
 
     for _ in range(total_tasks):
         # check to see which type to add to the file
