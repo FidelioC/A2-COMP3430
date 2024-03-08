@@ -17,7 +17,9 @@
 #include "queue.h"
 #include "tasks.h"
 #include "scheduler.h"
+#include "workers.h"
 #include "globals.h"
+#include "dispatcher.h"
 
 Node *create_node(char *name, int type, long length, int odds);
 
@@ -76,6 +78,16 @@ int main(void)
     printf("Queue 4:\n");
     print_queue(queue_four_head, "queue 4");
     // You can continue testing or implementing other parts of your program here
+
+    time_spec time1, time2;
+    int temp = 0;
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &time1);
+    for (int i = 0; i < 242000000; i++)
+        temp += temp;
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &time2);
+    long elapsed = time_spec_to_micro(diff(time1, time2));
+    printf("diff is: %ld:%ld\n", diff(time1, time2).tv_sec, diff(time1, time2).tv_nsec);
+    printf("elapsed id: %ld\n", elapsed);
 
     return 0;
 }

@@ -12,16 +12,17 @@ void move_queues_to_queue_four(Node **queue_one_head, Node **queue_one_tail,
                                Node **queue_four_head, Node **queue_four_tail)
 {
     printf("move queues to top queue\n");
-    move_jobs_top_queue(queue_three_head, queue_three_tail, queue_four_head, queue_four_tail, &queue_three_lock, &queue_four_lock);
-    move_jobs_top_queue(queue_two_head, queue_two_tail, queue_four_head, queue_four_tail, &queue_two_lock, &queue_four_lock);
-    move_jobs_top_queue(queue_one_head, queue_one_tail, queue_four_head, queue_four_tail, &queue_one_lock, &queue_four_lock);
+    move_jobs_top_queue(queue_three_head, queue_three_tail, queue_four_head, queue_four_tail, &queue_three_lock, &queue_four_lock, "queue_three");
+    move_jobs_top_queue(queue_two_head, queue_two_tail, queue_four_head, queue_four_tail, &queue_two_lock, &queue_four_lock, "queue_two");
+    move_jobs_top_queue(queue_one_head, queue_one_tail, queue_four_head, queue_four_tail, &queue_one_lock, &queue_four_lock, "queue_one");
 }
 
 void move_jobs_top_queue(Node **source_head, Node **source_tail,
                          Node **destination_head, Node **destination_tail,
-                         pthread_mutex_t *source_lock, pthread_mutex_t *destination_lock)
+                         pthread_mutex_t *source_lock, pthread_mutex_t *destination_lock, char *queue_name)
 {
     pthread_mutex_lock(source_lock);
+    printf("start moving task from %s\n", queue_name);
     while (*source_head != NULL)
     {
         Node *chosen_task = dequeue(source_head, source_tail);
@@ -31,15 +32,8 @@ void move_jobs_top_queue(Node **source_head, Node **source_tail,
         enqueue(chosen_task, destination_head, destination_tail);
         pthread_mutex_unlock(destination_lock);
     }
+    printf("finished moving task from %s\n", queue_name);
     pthread_mutex_unlock(source_lock);
-}
-
-long calculate_time_elapsed(time_spec start, time_spec current)
-{
-    long sec_diff = current.tv_sec - start.tv_sec;
-    long nsec_diff = current.tv_nsec - start.tv_nsec;
-
-    return (sec_diff * USEC_PER_SEC) + (nsec_diff / NANOS_PER_USEC);
 }
 
 Node *choose_task(void)

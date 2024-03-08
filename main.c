@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     pthread_t dispatcher_thread;
     char *file_name = argv[3];
     total_workers = atoi(argv[1]);
-    global_time_S = strtol(argv[2], NULL, 10);
+    global_time_S = strtol(argv[2], NULL, 10); // in microseconds
     pthread_t worker_threads[total_workers];
 
     // init param
@@ -171,7 +171,7 @@ void add_task(char **splitted_array)
     }
     else
     {
-        microsleep(type); // convert to microseconds
+        microsleep((type * NANOS_PER_USEC)); // convert to microseconds
     }
 }
 

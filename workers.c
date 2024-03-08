@@ -198,5 +198,5 @@ long get_current_time_micro(void)
 
     clock_gettime(CLOCK_REALTIME, &curr_time);
 
-    return curr_time.tv_sec * USEC_PER_SEC + curr_time.tv_nsec / NANOS_PER_USEC;
+    return (curr_time.tv_sec * USEC_PER_SEC) + (curr_time.tv_nsec / NANOS_PER_USEC);
 }

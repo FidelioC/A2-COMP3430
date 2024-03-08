@@ -3,6 +3,7 @@
 #include "queue.h"
 #include "globals.h"
 #include "scheduler.h"
+#include "dispatcher.h"
 
 void *dispatcher(void *ignore)
 {
@@ -14,7 +15,7 @@ void *dispatcher(void *ignore)
     while (!is_all_queue_empty() || !is_reading_complete)
     {
         clock_gettime(CLOCK_REALTIME, &curr_time);
-        elapsed_time = calculate_time_elapsed(start_time, curr_time);
+        elapsed_time = time_spec_to_micro(diff(start_time, curr_time));
         // printf("Elapsed time is %ld\n", elapsed_time);
         if (elapsed_time >= global_time_S)
         {
@@ -58,4 +59,25 @@ void *dispatcher(void *ignore)
 
     printf("Exiting dispatcher thread\n");
     pthread_exit(0);
+}
+
+time_spec diff(time_spec start, time_spec end)
+{
+    time_spec temp;
+    if ((end.tv_nsec - start.tv_nsec) < 0)
+    {
+        temp.tv_sec = end.tv_sec - start.tv_sec - 1;
+        temp.tv_nsec = 1000000000 + end.tv_nsec - start.tv_nsec;
+    }
+    else
+    {
+        temp.tv_sec = end.tv_sec - start.tv_sec;
+        temp.tv_nsec = end.tv_nsec - start.tv_nsec;
+    }
+    return temp;
+}
+
+long time_spec_to_micro(time_spec time)
+{
+    return time.tv_sec * USEC_PER_SEC + time.tv_nsec / NANOS_PER_USEC;
 }
