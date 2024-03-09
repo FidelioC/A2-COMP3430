@@ -10,55 +10,55 @@
 
 | S = 200 us          | `1 CPU` | `2 CPUs` | `8 CPUs` |
 | ------------------- | ------- | -------- | -------- |
-| `Type 0 Turnaround` | 309452  | 191115   | 137556   |
-| `Type 1 Turnaround` | 1045729 | 708512   | 508313   |
-| `Type 2 Turnaround` | 6434872 | 4584026  | 4602278  |
-| `Type 3 Turnaround` | 6353370 | 4482688  | 4472316  |
-| `Type 0 Response`   | 309342  | 191008   | 137370   |
-| `Type 1 Response`   | 1045615 | 708398   | 508206   |
-| `Type 2 Response`   | 6434768 | 4583923  | 4602172  |
-| `Type 3 Response`   | 6353271 | 4482583  | 4472216  |
+| `Type 0 Turnaround` | 86792   | 87904    | 84788    |
+| `Type 1 Turnaround` | 290841  | 294099   | 284496   |
+| `Type 2 Turnaround` | 1679096 | 1666340  | 1541372  |
+| `Type 3 Turnaround` | 2453146 | 2222560  | 1866243  |
+| `Type 0 Response`   | 86677   | 87788    | 84673    |
+| `Type 1 Response`   | 290726  | 293986   | 284380   |
+| `Type 2 Response`   | 1678980 | 1666222  | 1541257  |
+| `Type 3 Response`   | 2453041 | 2222455  | 1866138  |
 
 | S = 800 us          | `1 CPU` | `2 CPUs` | `8 CPUs` |
 | ------------------- | ------- | -------- | -------- |
-| `Type 0 Turnaround` | 121142  | 116051   | 102101   |
-| `Type 1 Turnaround` | 539474  | 378352   | 314426   |
-| `Type 2 Turnaround` | 3182795 | 2560439  | 1838193  |
-| `Type 3 Turnaround` | 3088969 | 3695125  | 2112622  |
-| `Type 0 Response`   | 121032  | 115941   | 101991   |
-| `Type 1 Response`   | 539363  | 378243   | 314315   |
-| `Type 2 Response`   | 3182684 | 2560332  | 1838077  |
-| `Type 3 Response`   | 3088863 | 3695030  | 2112513  |
+| `Type 0 Turnaround` | 87207   | 84121    | 84362    |
+| `Type 1 Turnaround` | 299394  | 290363   | 274742   |
+| `Type 2 Turnaround` | 1684486 | 1579861  | 1542472  |
+| `Type 3 Turnaround` | 1857583 | 2014410  | 1779940  |
+| `Type 0 Response`   | 87091   | 84005    | 84246    |
+| `Type 1 Response`   | 299275  | 290249   | 274626   |
+| `Type 2 Response`   | 1684366 | 1579746  | 1542356  |
+| `Type 3 Response`   | 1857469 | 2014298  | 1779832  |
 
 | S = 1600 us         | `1 CPU` | `2 CPUs` | `8 CPUs` |
 | ------------------- | ------- | -------- | -------- |
-| `Type 0 Turnaround` | 111346  | 84832    | 90585    |
-| `Type 1 Turnaround` | 381642  | 323755   | 310235   |
-| `Type 2 Turnaround` | 2878281 | 2117877  | 1750692  |
-| `Type 3 Turnaround` | 3308317 | 2021991  | 2500108  |
-| `Type 0 Response`   | 111234  | 84715    | 90470    |
-| `Type 1 Response`   | 381528  | 323637   | 310119   |
-| `Type 2 Response`   | 2878167 | 2117769  | 1750580  |
-| `Type 3 Response`   | 3308208 | 2021888  | 2500005  |
+| `Type 0 Turnaround` | 87923   | 85745    | 85141    |
+| `Type 1 Turnaround` | 293527  | 301037   | 283166   |
+| `Type 2 Turnaround` | 1606579 | 1623551  | 1577502  |
+| `Type 3 Turnaround` | 1899317 | 2241522  | 1956697  |
+| `Type 0 Response`   | 87806   | 85629    | 85025    |
+| `Type 1 Response`   | 293411  | 300922   | 283052   |
+| `Type 2 Response`   | 1606464 | 1623437  | 1577386  |
+| `Type 3 Response`   | 1899212 | 2241420  | 1956591  |
 
 | S = 3200 us         | `1 CPU` | `2 CPUs` | `8 CPUs` |
 | ------------------- | ------- | -------- | -------- |
-| `Type 0 Turnaround` | 247605  | 212594   | 126064   |
-| `Type 1 Turnaround` | 1166546 | 675440   | 355687   |
-| `Type 2 Turnaround` | 4949277 | 3261726  | 1955189  |
-| `Type 3 Turnaround` | 5158945 | 3674782  | 2163934  |
-| `Type 0 Response`   | 247492  | 212478   | 125956   |
-| `Type 1 Response`   | 1166441 | 675323   | 355572   |
-| `Type 2 Response`   | 4949170 | 3261612  | 1955076  |
-| `Type 3 Response`   | 5158844 | 3674672  | 2163823  |
+| `Type 0 Turnaround` | 83156   | 83527    | 84868    |
+| `Type 1 Turnaround` | 275941  | 285158   | 287586   |
+| `Type 2 Turnaround` | 1585980 | 1564771  | 1565997  |
+| `Type 3 Turnaround` | 2077605 | 2048111  | 1714825  |
+| `Type 0 Response`   | 83041   | 83414    | 84752    |
+| `Type 1 Response`   | 275826  | 285043   | 287469   |
+| `Type 2 Response`   | 1585865 | 1564656  | 1565881  |
+| `Type 3 Response`   | 2077507 | 2048001  | 1714718  |
 
 # Analysis Questions
 
 1. Q: How does the value of S affect turnaround time and response time? Is the difference in turnaround time and response time what you expected to see as S and the number of CPUs change? Why or why not?
 
-   Ans: According to the experiment that has been done, we can see that when S is too small (S = time allotment = 200 microsec),this will force the tasks to be pushed to the top even though it hasn't fully reached the bottom queue. Since moving tasks take a lot of time and blocks the CPU worker to do any work, this will cause a lot of waiting and context switching, thus, will cause the average turnaround time and response time to increase for most tasks.
+   Ans: According to the experiment that has been done, we can see that when S is too small (S = time allotment = 200 microsec),this will force the tasks to be pushed to the top even though it hasn't fully reached the bottom queue. Since moving tasks take a lot of time and blocks the CPU worker to get any new work for a moment, this will cause a lot of waiting and context switching, thus, will cause the average turnaround time and response time to increase for most tasks.
 
-   On the other hand, if we make S to be too high (S = 3200 microsec), jobs such as long and I/O tasks, will be starved for some amount of time, resulting in a higher turnaround time. The response time will be better compared to S = 200, because when the job initially comes the top most queue won't be over populated with a lot of tasks.
+   On the other hand, if we make S to be too high (S = 3200 microsec), jobs such as long and I/O tasks (since the length task for I/O is similar to long tasks), will be starved for some amount of time, resulting in a higher turnaround time. The response time will be better compared to S = 200, because when the job initially comes the top most queue won't be over populated with a lot of tasks.
 
    Finaly, the optimal S for this experiment is (S = 800 or 1600), both of them have a better turnaround and response time compared to S = 200 and S = 3200. Because the value of S is not set too high or too low.
 
@@ -68,4 +68,6 @@
 
    Ans:
 
-   - As we can see from the result of S = 200, S is set too low.
+   - As we can see from the result of S = 200, S is set too low. I/O jobs (type 3) doesn't receive the proper share of the CPU.
+   - On the other hand, if S = 3200, S is set too high, long running jobs will starve (long running jobs in the assignment is type 2 and 3). As we can see, type 2 and 3 have a higher average of turnaround and response in S = 3200 compared to S = 800 and 1600.
+   - Yes, it appears that they are highly correlated.
