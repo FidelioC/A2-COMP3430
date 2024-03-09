@@ -90,12 +90,11 @@ void decide_task_runtime(Node *node_task)
             random_number = rand() % QUANTUM_TIME + MIN_NUMBER;
             printf("DOING IO with time slice: %d\n", random_number);
             update_task_runtime(node_task->task, random_number);
+            return;
         }
     }
-    else // normal time slice
-    {
-        update_task_runtime(node_task->task, node_task->task->task_quantum_length);
-    }
+
+    update_task_runtime(node_task->task, node_task->task->task_quantum_length);
 }
 
 void decide_task_priority(Node *node_task)
