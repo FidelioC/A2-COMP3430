@@ -1,3 +1,14 @@
+//-----------------------------------------
+// NAME: Fidelio Ciandy
+// STUDENT NUMBER: 7934456
+// COURSE: COMP 3430
+// INSTRUCTOR: Saulo Santos
+// ASSIGNMENT: assignment 2
+//
+// REMARKS: simulate a multi threaded mlfq scheduler
+//
+//-----------------------------------------
+
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
@@ -76,6 +87,8 @@ int main(int argc, char *argv[])
     {
         pthread_join(worker_threads[i], NULL);
     }
+
+    // print the result of everything based on the specified format
     print_done_result();
 
     fclose(args.file);

@@ -9,7 +9,7 @@
 #include "workers.h"
 #include "tasks.h"
 
-void *worker(void *arg)
+void *worker(void *arg) // worker thread
 {
     Node *node_task;
     int worker_id = *((int *)arg);
@@ -79,6 +79,11 @@ void decide_task_first_response(Node *node_task)
     }
 }
 
+//------------------------------------------------------
+// decide_task_runtime
+//
+// PURPOSE: decide the task runtime based on the task type, I/O or no
+//------------------------------------------------------
 void decide_task_runtime(Node *node_task)
 {
     if (node_task->task->task_type == 3) // if I/O
@@ -99,17 +104,26 @@ void decide_task_runtime(Node *node_task)
 
 void decide_task_priority(Node *node_task)
 {
+    // if time allotment is empty and priority at least 0 (if less can't go down anymore)
+    // move down one priority
     if (node_task->task->task_time_allotment <= 0 && node_task->task->task_priority > 0)
     {
-        // move down a priority, allotment has been used
+        // move down a priority, allotment has been used, update priority
         update_task_priority(node_task->task, node_task->task->task_priority - 1);
         // reset allotment
         update_task_allotment(node_task->task, ALLOTMENT_TIME);
     }
 }
 
+//------------------------------------------------------
+// decide_task_destination
+//
+// PURPOSE: decide the destination of the task, whether to go back to queue
+//          or go to destination queue
+//------------------------------------------------------
 void decide_task_destination(Node *node_task)
 {
+    // go to one of the queue if task is not finish
     if (!is_task_finished(node_task->task))
     {
         if (node_task->task->task_priority == 4)
@@ -137,6 +151,7 @@ void decide_task_destination(Node *node_task)
             pthread_mutex_unlock(&queue_one_lock);
         }
     }
+    // go to done queue
     else
     {
         pthread_mutex_lock(&queue_done_lock);
@@ -150,6 +165,11 @@ void decide_task_destination(Node *node_task)
     }
 }
 
+//------------------------------------------------------
+// decide_response_turnaround
+//
+// PURPOSE: decide the turnaround reponse for each of the task.
+//------------------------------------------------------
 void decide_response_turnaround(Node *node_task)
 {
     if (node_task->task->task_type == 0)

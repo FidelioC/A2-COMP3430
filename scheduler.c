@@ -6,6 +6,11 @@
 #include "tasks.h"
 #include "scheduler.h"
 
+//------------------------------------------------------
+// move_queues_to_queue_four
+//
+// PURPOSE: move all jobs inside each queue to the highest priority queue
+//------------------------------------------------------
 void move_queues_to_queue_four(Node **queue_one_head, Node **queue_one_tail,
                                Node **queue_two_head, Node **queue_two_tail,
                                Node **queue_three_head, Node **queue_three_tail,
@@ -17,6 +22,12 @@ void move_queues_to_queue_four(Node **queue_one_head, Node **queue_one_tail,
     move_jobs_top_queue(queue_one_head, queue_one_tail, queue_four_head, queue_four_tail, &queue_one_lock, &queue_four_lock, "queue_one");
 }
 
+//------------------------------------------------------
+// move_jobs_top_queue
+//
+// PURPOSE: move all jobs from the source queue to the destination queue
+//       iterate each job, dequeue from source and enqueue to destination queue
+//------------------------------------------------------
 void move_jobs_top_queue(Node **source_head, Node **source_tail,
                          Node **destination_head, Node **destination_tail,
                          pthread_mutex_t *source_lock, pthread_mutex_t *destination_lock, char *queue_name)
