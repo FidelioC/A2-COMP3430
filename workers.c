@@ -81,13 +81,16 @@ void decide_task_first_response(Node *node_task)
 
 void decide_task_runtime(Node *node_task)
 {
-    srand(time(NULL));
-    int random_number = rand() % MAX_NUMBER + MIN_NUMBER;
-    if (random_number <= node_task->task->task_IO_odds) // do IO
+    if (node_task->task->task_type == 3) // if I/O
     {
-        random_number = rand() % QUANTUM_TIME + MIN_NUMBER;
-        printf("DOING IO with time slice: %d\n", random_number);
-        update_task_runtime(node_task->task, random_number);
+        srand(time(NULL));
+        int random_number = rand() % MAX_NUMBER + MIN_NUMBER;
+        if (random_number <= node_task->task->task_IO_odds) // do IO
+        {
+            random_number = rand() % QUANTUM_TIME + MIN_NUMBER;
+            printf("DOING IO with time slice: %d\n", random_number);
+            update_task_runtime(node_task->task, random_number);
+        }
     }
     else // normal time slice
     {
