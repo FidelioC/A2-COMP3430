@@ -8,6 +8,7 @@ med_thread_1 1 0 38 58
 med_thread_2 1 0 37 23
 short_thread_0 0 1 12 40
 med_thread_3 1 2 43 31
+DELAY 100
 io_thread_4 3 2 748 86
 med_thread_4 1 0 32 49
 io_thread_5 3 1 151 96
